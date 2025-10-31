@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+#include <time.h>
 
 void clearInputBuffer() {
     while ((getchar()) != '\n');
@@ -22,8 +23,12 @@ bool validAction(char *action) {
 }
 
 int main() {
+    time_t currentTime;
     char action[10];
     
+    time(&currentTime);
+    printf("\n\033[2;3mSession Start: %s\033[0m", ctime(&currentTime));
+
     printf("\n------------------------------------\n");
     printf("\033[1mChoose an Action by Entering a Number: \033[0m\n");
     printf("[1] create: Create New Bank Account\n");
@@ -35,10 +40,13 @@ int main() {
     printf("Selected Action: ");
     scanf("%s", action);
     clearInputBuffer();
+    
     while (!validAction(action)) {
         printf("\033[31m**ERROR: INVALID ACTION**\033[0m\n");
         printf("Please Enter a Valid Action: ");
         scanf("%s", action);
         clearInputBuffer();
     }
+
+    return 0;
 }
