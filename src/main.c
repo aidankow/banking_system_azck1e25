@@ -24,7 +24,7 @@ bool validAction(char *action) {
 
 int main() {
     time_t currentTime;
-    char action[10];
+    char action[11];
     
     time(&currentTime);
     printf("\n\033[2;3mSession Start: %s\033[0m", ctime(&currentTime));
@@ -38,13 +38,13 @@ int main() {
     printf("[5] remittance: Transfer Money to Another Account");
     printf("\n------------------------------------\n");
     printf("Selected Action: ");
-    scanf("%s", action);
+    scanf("%10s", action);
     clearInputBuffer();
     
     while (!validAction(action)) {
         printf("\033[31m**ERROR: INVALID ACTION**\033[0m\n");
         printf("Please Enter a Valid Action: ");
-        scanf("%s", action);
+        scanf("%10s", action);
         clearInputBuffer();
     }
 
