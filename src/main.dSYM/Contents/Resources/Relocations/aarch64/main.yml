@@ -2,8 +2,10 @@
 triple:          'arm64-apple-darwin'
 binary-path:     '/Users/kuanhuakow/Library/CloudStorage/OneDrive-UniversityofSouthampton/banking_system_azck1e25/src/main'
 relocations:
-  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _clearInputBuffer, symObjAddr: 0x0, symBinAddr: 0x100003A8C, symSize: 0x2C }
-  - { offsetInCU: 0x4D, offset: 0x4D, size: 0x8, addend: 0x0, symName: _clearInputBuffer, symObjAddr: 0x0, symBinAddr: 0x100003A8C, symSize: 0x2C }
-  - { offsetInCU: 0x62, offset: 0x62, size: 0x8, addend: 0x0, symName: _validAction, symObjAddr: 0x2C, symBinAddr: 0x100003AB8, symSize: 0x184 }
-  - { offsetInCU: 0xA6, offset: 0xA6, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x1B0, symBinAddr: 0x100003C3C, symSize: 0x150 }
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _clearInputBuffer, symObjAddr: 0x0, symBinAddr: 0x1000037AC, symSize: 0x2C }
+  - { offsetInCU: 0x4E, offset: 0x4E, size: 0x8, addend: 0x0, symName: _clearInputBuffer, symObjAddr: 0x0, symBinAddr: 0x1000037AC, symSize: 0x2C }
+  - { offsetInCU: 0x63, offset: 0x63, size: 0x8, addend: 0x0, symName: _validAction, symObjAddr: 0x2C, symBinAddr: 0x1000037D8, symSize: 0x184 }
+  - { offsetInCU: 0xA7, offset: 0xA7, size: 0x8, addend: 0x0, symName: _logAction, symObjAddr: 0x1B0, symBinAddr: 0x10000395C, symSize: 0x94 }
+  - { offsetInCU: 0xDD, offset: 0xDD, size: 0x8, addend: 0x0, symName: _getAction, symObjAddr: 0x244, symBinAddr: 0x1000039F0, symSize: 0x18C }
+  - { offsetInCU: 0x105, offset: 0x105, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x3D0, symBinAddr: 0x100003B7C, symSize: 0xD0 }
 ...
