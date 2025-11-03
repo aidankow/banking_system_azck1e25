@@ -86,16 +86,18 @@ void performAction(int action, struct accountDetails *newAccount) {
         generateDetails(newAccount);
         char temp[8];
 
-        printf("\n\nDETAILS ADDED:\n");
+        printf("\n\nDETAILS ENTERED:\n");
         printf("%s\n", newAccount->name);
         printf("%s\n", newAccount->id);
         printf("%s\n", newAccount->accountType);
         printf("%s\n", newAccount->pin);
         printf("Enter 'CONFIRM' To Confirm Details (Anything Else To Cancel): ");
         scanf("%[^\n]", temp);
+
         if (strcmp(temp, "CONFIRM") == 0) {
-            logBankAccountNo(newAccount->accountNo);
+            logAccountDetails(newAccount);
             printf("ACCOUNT ADDED: %s\n", newAccount->accountNo);
+            printf("Balance: %.2lf", newAccount->balance);
         } else {
             printf("\n\033[31m**ACTION CANCELLED**\033[0m\n");
         }

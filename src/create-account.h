@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdbool.h>
+#include <sys/stat.h>
+#include <errno.h>
+#include <unistd.h>
+#include "internal.h"
 
 struct accountDetails
 {
@@ -23,8 +27,9 @@ void generateBankAccountNo(char *accountNo) {
     int range = rand() % (9-7+1)+7; //(max-min+1)+min = range of random numbers (min, max)
     srand(time(NULL));
 
+    createDatabase();
     FILE *accountPtr;
-    accountPtr = fopen("/Users/kuanhuakow/Library/CloudStorage/OneDrive-UniversityofSouthampton/banking_system_azck1e25/database/index.txt", "r");
+    accountPtr = fopen("database/index.txt", "r");
     if (accountPtr == NULL) {
         printf("\033[31mError opening index.txt\033[0m\n");
     }
@@ -47,6 +52,7 @@ void generateBankAccountNo(char *accountNo) {
             }
         }
     }
+    fclose(accountPtr);
 }
 
 void logBankAccountNo(char *accountNo) {
@@ -56,6 +62,23 @@ void logBankAccountNo(char *accountNo) {
         printf("\033[31mError opening index.txt\033[0m\n");
     }
     fprintf(accountPtr, "%s\n", accountNo);
+    fclose(accountPtr);
+}
+
+void logAccountDetails(struct accountDetails *newAccount) {
+    char fileDirectory[512] = "/Users/kuanhuakow/Library/CloudStorage/OneDrive-UniversityofSouthampton/banking_system_azck1e25/database/";
+    char fileName[100];
+    strcpy(fileName, newAccount->accountNo);
+    strcat(fileName, ".txt");
+    strcat(fileDirectory, fileName);
+
+    logBankAccountNo(newAccount->accountNo);
+    FILE *accountPtr;
+    accountPtr = fopen("", "w");
+    if (accountPtr == NULL) {
+        printf("\033[31mError opening index.txt\033[0m\n");
+    }
+
     fclose(accountPtr);
 }
 
@@ -77,10 +100,8 @@ void inputDetails(struct accountDetails *newAccount) {
 void generateDetails(struct accountDetails *newAccount) {
     char accountNo[10];
     
-    inputDetails(newAccount);
+    // inputDetails(newAccount);
     generateBankAccountNo(accountNo);
-
-    //fill details into new account
     strcpy(newAccount->accountNo, accountNo);
     newAccount->balance = 0;
 }
