@@ -97,7 +97,6 @@ void performAction(int action, struct accountDetails *newAccount) {
         if (strcmp(temp, "CONFIRM") == 0) {
             logAccountDetails(newAccount);
             printf("ACCOUNT ADDED: %s\n", newAccount->accountNo);
-            printf("Balance: %.2lf", newAccount->balance);
         } else {
             printf("\n\033[31m**ACTION CANCELLED**\033[0m\n");
         }

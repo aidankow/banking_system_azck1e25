@@ -3,9 +3,6 @@
 #include <time.h>
 #include <stdbool.h>
 #include <sys/stat.h>
-#include <errno.h>
-#include <unistd.h>
-#include "internal.h"
 
 struct accountDetails
 {
@@ -27,9 +24,8 @@ void generateBankAccountNo(char *accountNo) {
     int range = rand() % (9-7+1)+7; //(max-min+1)+min = range of random numbers (min, max)
     srand(time(NULL));
 
-    createDatabase();
     FILE *accountPtr;
-    accountPtr = fopen("database/index.txt", "r");
+    accountPtr = fopen("/Users/kuanhuakow/Library/CloudStorage/OneDrive-UniversityofSouthampton/banking_system_azck1e25/database/index.txt", "r");
     if (accountPtr == NULL) {
         printf("\033[31mError opening index.txt\033[0m\n");
     }
@@ -74,11 +70,16 @@ void logAccountDetails(struct accountDetails *newAccount) {
 
     logBankAccountNo(newAccount->accountNo);
     FILE *accountPtr;
-    accountPtr = fopen("", "w");
+    accountPtr = fopen(fileDirectory, "w");
     if (accountPtr == NULL) {
         printf("\033[31mError opening index.txt\033[0m\n");
     }
-
+    fprintf(accountPtr, "Account Number: %s\n", newAccount->accountNo);
+    fprintf(accountPtr, "Account ID: %s\n", newAccount->id);
+    fprintf(accountPtr, "Full Name: %s\n", newAccount->name);
+    fprintf(accountPtr, "4-Digit Pin: %s\n", newAccount->pin);
+    fprintf(accountPtr, "Account Type: %s\n", newAccount->accountType);
+    fprintf(accountPtr, "Balance: %.2lf", newAccount->balance);
     fclose(accountPtr);
 }
 
@@ -100,7 +101,7 @@ void inputDetails(struct accountDetails *newAccount) {
 void generateDetails(struct accountDetails *newAccount) {
     char accountNo[10];
     
-    // inputDetails(newAccount);
+    inputDetails(newAccount);
     generateBankAccountNo(accountNo);
     strcpy(newAccount->accountNo, accountNo);
     newAccount->balance = 0;
