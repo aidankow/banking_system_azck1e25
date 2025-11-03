@@ -2,10 +2,11 @@
 #include <string.h>
 #include <time.h>
 #include "create-account.h"
+#include <stdbool.h>
 
 int checkAction(char *action) {
     int length = strlen(action);
-    
+
     if (strcmp(action, "1") == 0 || strcmp(action, "create") == 0) {
         return 1;
     } else if (strcmp(action, "2") == 0 || strcmp(action, "delete") == 0) {
@@ -63,7 +64,7 @@ int getAction() {
         return 0;
     } else {
         logAction(input);
-        printf("\n*\n*\n*\n*\n*\n*\n*\n");
+        printf("\n*\n*\n*\nPerforming Action: %s\n*\n*\n*\n", input);
         return action;
     }
 }
@@ -80,14 +81,37 @@ void displaySessionInfo() {
     //add loaded accounts
 }
 
+void performAction(int action, struct accountDetails *newAccount) {
+    if (action == 1) {
+        generateDetails(newAccount);
+        char temp[8];
+
+        printf("\n\nDETAILS ADDED:\n");
+        printf("%s\n", newAccount->name);
+        printf("%s\n", newAccount->id);
+        printf("%s\n", newAccount->accountType);
+        printf("%s\n", newAccount->pin);
+        printf("Enter 'CONFIRM' To Confirm Details (Anything Else To Cancel): ");
+        scanf("%[^\n]", temp);
+        if (strcmp(temp, "CONFIRM") == 0) {
+            logBankAccountNo(newAccount->accountNo);
+            printf("ACCOUNT ADDED: %s\n", newAccount->accountNo);
+        } else {
+            printf("\n\033[31m**ACTION CANCELLED**\033[0m\n");
+        }
+    }
+}
+
 int main() {
     char formattedTime[64];
     int action = -1;
+    struct accountDetails newAccount;
 
     displaySessionInfo();
 
     while (action != 0) {
         action = getAction();
+        performAction(action, &newAccount);
     }
 
     return 0;
