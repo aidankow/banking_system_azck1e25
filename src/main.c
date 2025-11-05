@@ -3,6 +3,9 @@
 #include <time.h>
 #include "create-account.h"
 #include <stdbool.h>
+#include <unistd.h>
+
+// Library/CloudStorage/OneDrive-UniversityofSouthampton/banking_system_azck1e25/src
 
 int checkAction(char *action) {
     int length = strlen(action);
@@ -25,10 +28,10 @@ int checkAction(char *action) {
 
 void logAction(char *action) {
     FILE *transactionPtr;
-    transactionPtr = fopen("/Users/kuanhuakow/Library/CloudStorage/OneDrive-UniversityofSouthampton/banking_system_azck1e25/database/transaction.log", "a");
-    if (transactionPtr == NULL) {
-        printf("\033[31mError opening transaction.log\033[0m\n");
-    }
+    transactionPtr = fopen("../database/transaction.log", "a");
+    // if (transactionPtr == NULL) {
+    //     printf("\033[31mError opening transaction.log\033[0m\n");
+    // }
     fprintf(transactionPtr, "%s\n", action);
     fclose(transactionPtr);
 }
@@ -72,11 +75,11 @@ int getAction() {
 void displaySessionInfo() {
     time_t now = time(NULL);
     struct tm *time = localtime(&now);
-    char buffer[100];
+    char timeString[100];
     int loadedAccounts = 0;
     
-    strftime(buffer, sizeof(buffer), "%B %d, %A %H:%M:%S", time);
-    printf("\n\033[2;3mSession Start: %s\033[0m\n", buffer);
+    strftime(timeString, sizeof(timeString), "%B %d, %A %H:%M:%S", time);
+    printf("\n\033[2;3mSession Start: %s\033[0m\n", timeString);
     printf("\033[2;3mCount of Loaded Accounts: %d\033[0m\n", loadedAccounts);
     //add loaded accounts
 }

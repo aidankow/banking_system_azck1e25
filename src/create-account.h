@@ -3,6 +3,7 @@
 #include <time.h>
 #include <stdbool.h>
 #include <sys/stat.h>
+#include <unistd.h>
 
 struct accountDetails
 {
@@ -24,11 +25,16 @@ void generateBankAccountNo(char *accountNo) {
     int range = rand() % (9-7+1)+7; //(max-min+1)+min = range of random numbers (min, max)
     srand(time(NULL));
 
+    char cwd[1024];
+    getcwd(cwd, sizeof(cwd));
+    printf("%s", cwd);
+
     FILE *accountPtr;
-    accountPtr = fopen("/Users/kuanhuakow/Library/CloudStorage/OneDrive-UniversityofSouthampton/banking_system_azck1e25/database/index.txt", "r");
+    accountPtr = fopen("../database/index.txt", "r");
     if (accountPtr == NULL) {
-        printf("\033[31mError opening index.txt\033[0m\n");
+        printf("\033[31m(1)Error opening index.txt\033[0m\n");
     }
+
     //check if account number exists in index.txt
     while (!valid) {
         for(int i=0;i<range;i++) {
@@ -40,7 +46,6 @@ void generateBankAccountNo(char *accountNo) {
         rewind(accountPtr);
         while (fgets(temp, 100, accountPtr)) {
             temp[strcspn(temp, "\n")] = 0; //get rid of \n from line read from file
-            // printf("CMP: %s | %s\n", temp, accountNo);
             if (strcmp(temp, accountNo) == 0) {
                 valid = false;
                 printf("ERROR: %s | %s\n", temp, accountNo);
@@ -53,16 +58,16 @@ void generateBankAccountNo(char *accountNo) {
 
 void logBankAccountNo(char *accountNo) {
     FILE *accountPtr;
-    accountPtr = fopen("/Users/kuanhuakow/Library/CloudStorage/OneDrive-UniversityofSouthampton/banking_system_azck1e25/database/index.txt", "a");
+    accountPtr = fopen("database/index.txt", "a");
     if (accountPtr == NULL) {
-        printf("\033[31mError opening index.txt\033[0m\n");
+        printf("\033[31m(2)Error opening index.txt\033[0m\n");
     }
     fprintf(accountPtr, "%s\n", accountNo);
     fclose(accountPtr);
 }
 
 void logAccountDetails(struct accountDetails *newAccount) {
-    char fileDirectory[512] = "/Users/kuanhuakow/Library/CloudStorage/OneDrive-UniversityofSouthampton/banking_system_azck1e25/database/";
+    char fileDirectory[512] = "database/";
     char fileName[100];
     strcpy(fileName, newAccount->accountNo);
     strcat(fileName, ".txt");
@@ -72,7 +77,7 @@ void logAccountDetails(struct accountDetails *newAccount) {
     FILE *accountPtr;
     accountPtr = fopen(fileDirectory, "w");
     if (accountPtr == NULL) {
-        printf("\033[31mError opening index.txt\033[0m\n");
+        printf("\033[31mError opening %s.txt\033[0m\n", fileDirectory);
     }
     fprintf(accountPtr, "Account Number: %s\n", newAccount->accountNo);
     fprintf(accountPtr, "Account ID: %s\n", newAccount->id);
