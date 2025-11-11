@@ -10,15 +10,15 @@
 int checkAction(char *action) {
     int length = strlen(action);
 
-    if (strcmp(action, "1") == 0 || strcmp(action, "create") == 0) {
+    if (strcmp(action, "1") == 0 || strcasecmp(action, "create") == 0) {
         return 1;
-    } else if (strcmp(action, "2") == 0 || strcmp(action, "delete") == 0) {
+    } else if (strcmp(action, "2") == 0 || strcasecmp(action, "delete") == 0) {
         return 2;
-    } else if (strcmp(action, "3") == 0 || strcmp(action, "deposit") == 0) {
+    } else if (strcmp(action, "3") == 0 || strcasecmp(action, "deposit") == 0) {
         return 3;
-    } else if (strcmp(action, "4") == 0 || strcmp(action, "withdrawal") == 0) {
+    } else if (strcmp(action, "4") == 0 || strcasecmp(action, "withdrawal") == 0) {
         return 4;
-    } else if (strcmp(action, "5") == 0 || strcmp(action, "remittance") == 0) {
+    } else if (strcmp(action, "5") == 0 || strcasecmp(action, "remittance") == 0) {
         return 5;
     } else if (strcmp(action, "EXIT") == 0) {
         return 0;
@@ -45,7 +45,7 @@ int getAction() {
     printf("[1] create: Create New Bank Account\n");
     printf("[2] delete: Delete Bank Account\n");
     printf("[3] deposit: Deposit Money\n");
-    printf("[4] withdrawl: Withdrawal Money\n");
+    printf("[4] withdrawal: Withdrawal Money\n");
     printf("[5] remittance: Transfer Money to Another Account\n");
     printf("Enter 'EXIT' to exit the program.");
     printf("\n------------------------------------\n");
