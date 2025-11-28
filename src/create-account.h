@@ -90,22 +90,32 @@ bool isNum(char *string) {
 }
 
 bool nameCheck(char *name) {
+    // gets rid of whitespaces
+    char temp[101];
+    strcpy(temp, name);
     int currentChar = 0;
     int nextChar = 0;
-    while (name[currentChar] != '\0') {
-        if (name[currentChar] != ' ') {
-            name[nextChar] = name[currentChar];
+    while (temp[currentChar] != '\0') {
+        if (temp[currentChar] != ' ') {
+            temp[nextChar] = temp[currentChar];
             nextChar++;
         }
         currentChar++;
     }
-    name[nextChar] = '\0';
 
-    if (name[0] == '\0') {
+    // ensure not an empty string
+    temp[nextChar] = '\0';
+    if (temp[0] == '\0') {
         return false;
-    } else {
-        return true;
     }
+
+    // ensure only alphabets are used
+    for (int i=0;temp[i]!='\0';i++) {
+        if (!isalpha(temp[i])) {
+            return false;
+        }
+    }
+    return true;
 }
 
 bool idCheck(char *id) {
@@ -117,32 +127,62 @@ bool idCheck(char *id) {
     return true;
 }
 
+bool accountTypeCheck (char *type) {
+    if (strcasecmp(type, "savings") == 0 || strcasecmp(type, "saving") == 0 || strcasecmp(type, "current") == 0) {
+        return true;
+    }
+    return false;
+}
+
+bool pinCheck (char *pin) {
+    if (strlen(pin) != 4) {
+        return false;
+    } else if (!isNum(pin)) {
+        return false;
+    }
+    return true;
+}
+
 void inputDetails(struct accountDetails *newAccount) {
     printf("\nPlease Enter Your Full Name: ");
     fgets(newAccount->name, sizeof(newAccount->name), stdin);
     newAccount->name[strcspn(newAccount->name, "\n")] = '\0';
-
-    char temp[100];
-    strcpy(temp, newAccount->name);
-    while (!nameCheck(temp)) {
+    while (!nameCheck(newAccount->name)) {
         printf("\033[31m**ERROR: INVALID NAME**\033[0m");
         printf("\nPlease Enter Your Full Name: ");
         fgets(newAccount->name, sizeof(newAccount->name), stdin);
         newAccount->name[strcspn(newAccount->name, "\n")] = '\0';
-        strcpy(temp, newAccount->name);
     }
 
     printf("Please Enter Your Identification Number (ID): ");
-    scanf("%8s", newAccount->id);
+    scanf("%[^\n]", newAccount->id);
     clearInputBuffer();
+    while (!idCheck(newAccount->id)) {
+        printf("\033[31m**ERROR: INVALID ID**\033[0m");
+        printf("\nPlease Enter Your Identification Number (ID): ");
+        scanf("%[^\n]", newAccount->id);
+        clearInputBuffer();
+    }
 
     printf("Please Enter Your Account Type (Savings/Current): ");
-    scanf("%7s", newAccount->accountType);
+    scanf("%[^\n]", newAccount->accountType);
     clearInputBuffer();
+    while (!accountTypeCheck(newAccount->accountType)) {
+        printf("\033[31m**ERROR: INVALID ACCOUNT TYPE**\033[0m");
+        printf("\nPlease Enter Your Account Type (Savings/Current): ");
+        scanf("%[^\n]", newAccount->accountType);
+        clearInputBuffer();
+    }
 
     printf("Please Enter Your 4-Digit Pin: ");
-    scanf("%4s", newAccount->pin);
+    scanf("%[^\n]", newAccount->pin);
     clearInputBuffer();
+    while (!idCheck(newAccount->pin)) {
+        printf("\033[31m**ERROR: INVALID PIN**\033[0m");
+        printf("\nPlease Enter Your 4-Digit Pin: ");
+        scanf("%[^\n]", newAccount->pin);
+        clearInputBuffer();
+    }
 }
 
 void generateDetails(struct accountDetails *newAccount) {

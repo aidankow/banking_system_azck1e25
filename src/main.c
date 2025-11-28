@@ -27,9 +27,9 @@ int checkAction(char *action) {
 void logAction(char *action) {
     FILE *transactionPtr;
     transactionPtr = fopen("../database/transaction.log", "a");
-    // if (transactionPtr == NULL) {
-    //     printf("\033[31mError opening transaction.log\033[0m\n");
-    // }
+    if (transactionPtr == NULL) {
+        printf("\033[31mError opening transaction.log\033[0m\n");
+    }
     fprintf(transactionPtr, "%s\n", action);
     fclose(transactionPtr);
 }
@@ -48,14 +48,14 @@ int getAction() {
     printf("Enter 'EXIT' to exit the program.");
     printf("\n------------------------------------\n");
     printf("Selected Action: ");
-    scanf("%10s", input);
+    scanf("%[^\n]", input);
     clearInputBuffer();
     
     action = checkAction(input);
     while (action == -1) {
         printf("\033[31m**ERROR: INVALID ACTION**\033[0m\n");
         printf("Please Enter a Valid Action: ");
-        scanf("%10s", input);
+        scanf("%[^\n]", input);
         clearInputBuffer();
         action = checkAction(input);
     }
@@ -111,6 +111,7 @@ void performAction(int action, struct accountDetails *newAccount) {
         printf("%s\n", newAccount->pin);
         printf("Enter 'CONFIRM' To Confirm Details (Anything Else To Cancel): ");
         scanf("%[^\n]", temp);
+        clearInputBuffer();
 
         if (strcasecmp(temp, "CONFIRM") == 0) {
             logAccountDetails(newAccount);

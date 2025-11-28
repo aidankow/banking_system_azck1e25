@@ -2,20 +2,21 @@
 triple:          'arm64-apple-darwin'
 binary-path:     '/Users/kuanhuakow/Library/CloudStorage/OneDrive-UniversityofSouthampton/banking_system_azck1e25/src/main'
 relocations:
-  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _generateBankAccountNo, symObjAddr: 0x0, symBinAddr: 0x1000026F4, symSize: 0x1E8 }
-  - { offsetInCU: 0x66, offset: 0x66, size: 0x8, addend: 0x0, symName: _generateBankAccountNo, symObjAddr: 0x0, symBinAddr: 0x1000026F4, symSize: 0x1E8 }
-  - { offsetInCU: 0xFB, offset: 0xFB, size: 0x8, addend: 0x0, symName: _logBankAccountNo, symObjAddr: 0x1E8, symBinAddr: 0x1000028DC, symSize: 0x7C }
-  - { offsetInCU: 0x12D, offset: 0x12D, size: 0x8, addend: 0x0, symName: _logAccountDetails, symObjAddr: 0x264, symBinAddr: 0x100002958, symSize: 0x164 }
-  - { offsetInCU: 0x17F, offset: 0x17F, size: 0x8, addend: 0x0, symName: _isNum, symObjAddr: 0x3C8, symBinAddr: 0x100002ABC, symSize: 0xA4 }
-  - { offsetInCU: 0x1C3, offset: 0x1C3, size: 0x8, addend: 0x0, symName: _nameCheck, symObjAddr: 0x46C, symBinAddr: 0x100002B60, symSize: 0xEC }
-  - { offsetInCU: 0x207, offset: 0x207, size: 0x8, addend: 0x0, symName: _idCheck, symObjAddr: 0x558, symBinAddr: 0x100002C4C, symSize: 0x8C }
-  - { offsetInCU: 0x22F, offset: 0x22F, size: 0x8, addend: 0x0, symName: _inputDetails, symObjAddr: 0x5E4, symBinAddr: 0x100002CD8, symSize: 0x290 }
-  - { offsetInCU: 0x263, offset: 0x263, size: 0x8, addend: 0x0, symName: _generateDetails, symObjAddr: 0x874, symBinAddr: 0x100002F68, symSize: 0x84 }
-  - { offsetInCU: 0x295, offset: 0x295, size: 0x8, addend: 0x0, symName: _checkAction, symObjAddr: 0x8F8, symBinAddr: 0x100002FEC, symSize: 0x20C }
-  - { offsetInCU: 0x2BD, offset: 0x2BD, size: 0x8, addend: 0x0, symName: _logAction, symObjAddr: 0xB04, symBinAddr: 0x1000031F8, symSize: 0x58 }
-  - { offsetInCU: 0x2EF, offset: 0x2EF, size: 0x8, addend: 0x0, symName: _getAction, symObjAddr: 0xB5C, symBinAddr: 0x100003250, symSize: 0x1EC }
-  - { offsetInCU: 0x325, offset: 0x325, size: 0x8, addend: 0x0, symName: _getLoadedAccounts, symObjAddr: 0xD48, symBinAddr: 0x10000343C, symSize: 0xE4 }
-  - { offsetInCU: 0x369, offset: 0x369, size: 0x8, addend: 0x0, symName: _displaySessionInfo, symObjAddr: 0xE2C, symBinAddr: 0x100003520, symSize: 0xC0 }
-  - { offsetInCU: 0x3B7, offset: 0x3B7, size: 0x8, addend: 0x0, symName: _performAction, symObjAddr: 0xEEC, symBinAddr: 0x1000035E0, symSize: 0x164 }
-  - { offsetInCU: 0x405, offset: 0x405, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x1050, symBinAddr: 0x100003744, symSize: 0x90 }
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _clearInputBuffer, symObjAddr: 0x0, symBinAddr: 0x1000026EC, symSize: 0x2C }
+  - { offsetInCU: 0x66, offset: 0x66, size: 0x8, addend: 0x0, symName: _clearInputBuffer, symObjAddr: 0x0, symBinAddr: 0x1000026EC, symSize: 0x2C }
+  - { offsetInCU: 0x7B, offset: 0x7B, size: 0x8, addend: 0x0, symName: _generateBankAccountNo, symObjAddr: 0x2C, symBinAddr: 0x100002718, symSize: 0x1E8 }
+  - { offsetInCU: 0x110, offset: 0x110, size: 0x8, addend: 0x0, symName: _logBankAccountNo, symObjAddr: 0x214, symBinAddr: 0x100002900, symSize: 0x7C }
+  - { offsetInCU: 0x142, offset: 0x142, size: 0x8, addend: 0x0, symName: _logAccountDetails, symObjAddr: 0x290, symBinAddr: 0x10000297C, symSize: 0x164 }
+  - { offsetInCU: 0x194, offset: 0x194, size: 0x8, addend: 0x0, symName: _isNum, symObjAddr: 0x3F4, symBinAddr: 0x100002AE0, symSize: 0xA4 }
+  - { offsetInCU: 0x1D8, offset: 0x1D8, size: 0x8, addend: 0x0, symName: _nameCheck, symObjAddr: 0x498, symBinAddr: 0x100002B84, symSize: 0x1AC }
+  - { offsetInCU: 0x246, offset: 0x246, size: 0x8, addend: 0x0, symName: _idCheck, symObjAddr: 0x644, symBinAddr: 0x100002D30, symSize: 0x8C }
+  - { offsetInCU: 0x26E, offset: 0x26E, size: 0x8, addend: 0x0, symName: _inputDetails, symObjAddr: 0x6D0, symBinAddr: 0x100002DBC, symSize: 0x1A8 }
+  - { offsetInCU: 0x292, offset: 0x292, size: 0x8, addend: 0x0, symName: _generateDetails, symObjAddr: 0x878, symBinAddr: 0x100002F64, symSize: 0x84 }
+  - { offsetInCU: 0x2C4, offset: 0x2C4, size: 0x8, addend: 0x0, symName: _checkAction, symObjAddr: 0x8FC, symBinAddr: 0x100002FE8, symSize: 0x1E4 }
+  - { offsetInCU: 0x2EC, offset: 0x2EC, size: 0x8, addend: 0x0, symName: _logAction, symObjAddr: 0xAE0, symBinAddr: 0x1000031CC, symSize: 0x7C }
+  - { offsetInCU: 0x31E, offset: 0x31E, size: 0x8, addend: 0x0, symName: _getAction, symObjAddr: 0xB5C, symBinAddr: 0x100003248, symSize: 0x1B4 }
+  - { offsetInCU: 0x354, offset: 0x354, size: 0x8, addend: 0x0, symName: _getLoadedAccounts, symObjAddr: 0xD10, symBinAddr: 0x1000033FC, symSize: 0xE4 }
+  - { offsetInCU: 0x398, offset: 0x398, size: 0x8, addend: 0x0, symName: _displaySessionInfo, symObjAddr: 0xDF4, symBinAddr: 0x1000034E0, symSize: 0xC0 }
+  - { offsetInCU: 0x3E6, offset: 0x3E6, size: 0x8, addend: 0x0, symName: _performAction, symObjAddr: 0xEB4, symBinAddr: 0x1000035A0, symSize: 0x168 }
+  - { offsetInCU: 0x434, offset: 0x434, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x101C, symBinAddr: 0x100003708, symSize: 0x90 }
 ...
