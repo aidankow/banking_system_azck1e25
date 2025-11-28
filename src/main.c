@@ -119,7 +119,24 @@ void performAction(int action, struct accountDetails *newAccount) {
         } else {
             printf("\n\033[31m**ACTION CANCELLED**\033[0m\n");
         }
-    }
+    } else if (action == 2) {
+        printf("\n\033[1mLIST OF EXISTING BANK ACCOUNTS:\033[0m\n");
+        char temp[100];
+        int counter = 1;
+
+        FILE *accountPtr;
+        accountPtr = fopen("../database/index.txt", "r");
+        if (accountPtr == NULL) {
+            printf("\033[31m(1)Error opening index.txt\033[0m\n");
+        }
+        while (fgets(temp, 100, accountPtr)) {
+            printf("%d %s", counter, temp);
+            counter++;
+        }
+        fclose(accountPtr);
+
+        
+        }
 }
 
 int main() {
