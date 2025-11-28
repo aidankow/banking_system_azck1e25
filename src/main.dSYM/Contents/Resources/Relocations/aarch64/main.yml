@@ -2,17 +2,17 @@
 triple:          'arm64-apple-darwin'
 binary-path:     '/Users/kuanhuakow/Library/CloudStorage/OneDrive-UniversityofSouthampton/banking_system_azck1e25/src/main'
 relocations:
-  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _clearInputBuffer, symObjAddr: 0x0, symBinAddr: 0x100002B2C, symSize: 0x2C }
-  - { offsetInCU: 0x72, offset: 0x72, size: 0x8, addend: 0x0, symName: _clearInputBuffer, symObjAddr: 0x0, symBinAddr: 0x100002B2C, symSize: 0x2C }
-  - { offsetInCU: 0x87, offset: 0x87, size: 0x8, addend: 0x0, symName: _generateBankAccountNo, symObjAddr: 0x2C, symBinAddr: 0x100002B58, symSize: 0x218 }
-  - { offsetInCU: 0x12B, offset: 0x12B, size: 0x8, addend: 0x0, symName: _logBankAccountNo, symObjAddr: 0x244, symBinAddr: 0x100002D70, symSize: 0x7C }
-  - { offsetInCU: 0x15D, offset: 0x15D, size: 0x8, addend: 0x0, symName: _logAccountDetails, symObjAddr: 0x2C0, symBinAddr: 0x100002DEC, symSize: 0x1C8 }
-  - { offsetInCU: 0x1AD, offset: 0x1AD, size: 0x8, addend: 0x0, symName: _inputDetails, symObjAddr: 0x488, symBinAddr: 0x100002FB4, symSize: 0xC8 }
-  - { offsetInCU: 0x1D1, offset: 0x1D1, size: 0x8, addend: 0x0, symName: _generateDetails, symObjAddr: 0x550, symBinAddr: 0x10000307C, symSize: 0x84 }
-  - { offsetInCU: 0x203, offset: 0x203, size: 0x8, addend: 0x0, symName: _checkAction, symObjAddr: 0x5D4, symBinAddr: 0x100003100, symSize: 0x1F4 }
-  - { offsetInCU: 0x239, offset: 0x239, size: 0x8, addend: 0x0, symName: _logAction, symObjAddr: 0x7C8, symBinAddr: 0x1000032F4, symSize: 0x58 }
-  - { offsetInCU: 0x26B, offset: 0x26B, size: 0x8, addend: 0x0, symName: _getAction, symObjAddr: 0x820, symBinAddr: 0x10000334C, symSize: 0x1B4 }
-  - { offsetInCU: 0x2A1, offset: 0x2A1, size: 0x8, addend: 0x0, symName: _displaySessionInfo, symObjAddr: 0x9D4, symBinAddr: 0x100003500, symSize: 0xBC }
-  - { offsetInCU: 0x2EF, offset: 0x2EF, size: 0x8, addend: 0x0, symName: _performAction, symObjAddr: 0xA90, symBinAddr: 0x1000035BC, symSize: 0x164 }
-  - { offsetInCU: 0x33D, offset: 0x33D, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0xBF4, symBinAddr: 0x100003720, symSize: 0x90 }
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _clearInputBuffer, symObjAddr: 0x0, symBinAddr: 0x100002B40, symSize: 0x2C }
+  - { offsetInCU: 0x72, offset: 0x72, size: 0x8, addend: 0x0, symName: _clearInputBuffer, symObjAddr: 0x0, symBinAddr: 0x100002B40, symSize: 0x2C }
+  - { offsetInCU: 0x87, offset: 0x87, size: 0x8, addend: 0x0, symName: _generateBankAccountNo, symObjAddr: 0x2C, symBinAddr: 0x100002B6C, symSize: 0x218 }
+  - { offsetInCU: 0x12B, offset: 0x12B, size: 0x8, addend: 0x0, symName: _logBankAccountNo, symObjAddr: 0x244, symBinAddr: 0x100002D84, symSize: 0x7C }
+  - { offsetInCU: 0x15D, offset: 0x15D, size: 0x8, addend: 0x0, symName: _logAccountDetails, symObjAddr: 0x2C0, symBinAddr: 0x100002E00, symSize: 0x1C8 }
+  - { offsetInCU: 0x1AD, offset: 0x1AD, size: 0x8, addend: 0x0, symName: _inputDetails, symObjAddr: 0x488, symBinAddr: 0x100002FC8, symSize: 0xC8 }
+  - { offsetInCU: 0x1D1, offset: 0x1D1, size: 0x8, addend: 0x0, symName: _generateDetails, symObjAddr: 0x550, symBinAddr: 0x100003090, symSize: 0x84 }
+  - { offsetInCU: 0x203, offset: 0x203, size: 0x8, addend: 0x0, symName: _checkAction, symObjAddr: 0x5D4, symBinAddr: 0x100003114, symSize: 0x1F4 }
+  - { offsetInCU: 0x239, offset: 0x239, size: 0x8, addend: 0x0, symName: _logAction, symObjAddr: 0x7C8, symBinAddr: 0x100003308, symSize: 0x58 }
+  - { offsetInCU: 0x26B, offset: 0x26B, size: 0x8, addend: 0x0, symName: _getAction, symObjAddr: 0x820, symBinAddr: 0x100003360, symSize: 0x1B4 }
+  - { offsetInCU: 0x2A1, offset: 0x2A1, size: 0x8, addend: 0x0, symName: _displaySessionInfo, symObjAddr: 0x9D4, symBinAddr: 0x100003514, symSize: 0xBC }
+  - { offsetInCU: 0x2EF, offset: 0x2EF, size: 0x8, addend: 0x0, symName: _performAction, symObjAddr: 0xA90, symBinAddr: 0x1000035D0, symSize: 0x164 }
+  - { offsetInCU: 0x33D, offset: 0x33D, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0xBF4, symBinAddr: 0x100003734, symSize: 0x90 }
 ...

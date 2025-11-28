@@ -58,7 +58,7 @@ void generateBankAccountNo(char *accountNo) {
 
 void logBankAccountNo(char *accountNo) {
     FILE *accountPtr;
-    accountPtr = fopen("database/index.txt", "a");
+    accountPtr = fopen("../database/index.txt", "a");
     if (accountPtr == NULL) {
         printf("\033[31m(2)Error opening index.txt\033[0m\n");
     }
@@ -67,7 +67,7 @@ void logBankAccountNo(char *accountNo) {
 }
 
 void logAccountDetails(struct accountDetails *newAccount) {
-    char fileDirectory[512] = "database/";
+    char fileDirectory[512] = "../database/";
     char fileName[100];
     strcpy(fileName, newAccount->accountNo);
     strcat(fileName, ".txt");
