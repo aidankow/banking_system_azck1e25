@@ -1,6 +1,0 @@
-Account Number: 90739815
-Account ID: 12345678
-Full Name: Aidan Kow Zen Chi
-4-Digit Pin: 1234
-Account Type: Savings
-Balance: 0.00

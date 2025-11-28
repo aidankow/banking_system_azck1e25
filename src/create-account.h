@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <ctype.h>
 
 struct accountDetails
 {
@@ -24,10 +25,6 @@ void generateBankAccountNo(char *accountNo) {
     bool valid = false;
     int range = rand() % (9-7+1)+7; //(max-min+1)+min = range of random numbers (min, max)
     srand(time(NULL));
-
-    char cwd[1024];
-    getcwd(cwd, sizeof(cwd));
-    printf("%s", cwd);
 
     FILE *accountPtr;
     accountPtr = fopen("../database/index.txt", "r");
@@ -79,25 +76,70 @@ void logAccountDetails(struct accountDetails *newAccount) {
     if (accountPtr == NULL) {
         printf("\033[31mError opening %s.txt\033[0m\n", fileDirectory);
     }
-    fprintf(accountPtr, "Account Number: %s\n", newAccount->accountNo);
-    fprintf(accountPtr, "Account ID: %s\n", newAccount->id);
-    fprintf(accountPtr, "Full Name: %s\n", newAccount->name);
-    fprintf(accountPtr, "4-Digit Pin: %s\n", newAccount->pin);
-    fprintf(accountPtr, "Account Type: %s\n", newAccount->accountType);
-    fprintf(accountPtr, "Balance: %.2lf", newAccount->balance);
+    fprintf(accountPtr, "%s,%s,%s,%s,%s,%.2lf\n", newAccount->accountNo, newAccount->id, newAccount->name, newAccount->pin, newAccount->accountType, newAccount->balance);
     fclose(accountPtr);
+}
+
+bool isNum(char *string) {
+    for (int i=0;string[i]!='\0';i++) {
+        if (!isdigit(string[i])) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool nameCheck(char *name) {
+    int currentChar = 0;
+    int nextChar = 0;
+    while (name[currentChar] != '\0') {
+        if (name[currentChar] != ' ') {
+            name[nextChar] = name[currentChar];
+            nextChar++;
+        }
+        currentChar++;
+    }
+    name[nextChar] = '\0';
+
+    if (name[0] == '\0') {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+bool idCheck(char *id) {
+    if (strlen(id) != 8) {
+        return false;
+    } else if (!isNum(id)) {
+        return false;
+    }
+    return true;
 }
 
 void inputDetails(struct accountDetails *newAccount) {
     printf("\nPlease Enter Your Full Name: ");
-    scanf("%100[^\n]", newAccount->name);
-    clearInputBuffer();
+    fgets(newAccount->name, sizeof(newAccount->name), stdin);
+    newAccount->name[strcspn(newAccount->name, "\n")] = '\0';
+
+    char temp[100];
+    strcpy(temp, newAccount->name);
+    while (!nameCheck(temp)) {
+        printf("\033[31m**ERROR: INVALID NAME**\033[0m");
+        printf("\nPlease Enter Your Full Name: ");
+        fgets(newAccount->name, sizeof(newAccount->name), stdin);
+        newAccount->name[strcspn(newAccount->name, "\n")] = '\0';
+        strcpy(temp, newAccount->name);
+    }
+
     printf("Please Enter Your Identification Number (ID): ");
     scanf("%8s", newAccount->id);
     clearInputBuffer();
+
     printf("Please Enter Your Account Type (Savings/Current): ");
     scanf("%7s", newAccount->accountType);
     clearInputBuffer();
+
     printf("Please Enter Your 4-Digit Pin: ");
     scanf("%4s", newAccount->pin);
     clearInputBuffer();
