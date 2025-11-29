@@ -131,8 +131,8 @@ void withdrawFromAccount(char *accountNo) {
     printf("\n\033[1;32mRM%.2lf Withdrawn!\033[0m\n", atof(amountToWithdraw));
 }
 
-int checkRemittanceFee(struct accountCSV *senderAccount, struct accountCSV *receiverAccount) {
-    int percentage = 0;
+double checkRemittanceFee(struct accountCSV *senderAccount, struct accountCSV *receiverAccount) {
+    double percentage = 0;
     if (strcmp(senderAccount->accountType, "Savings") == 0 && strcmp(receiverAccount->accountType, "Current") == 0) {
         percentage = 2;
     } else if (strcmp(senderAccount->accountType, "Current") == 0 && strcmp(receiverAccount->accountType, "Savings") == 0) {
@@ -166,12 +166,12 @@ void transferToAccount(char *senderNo, char *receiverNo) {
     double receiverOldBalance = atof(receiverAccount.balance);
     double receiverrNewBalance;
     
-    int remittanceFeePercentage = checkRemittanceFee(&senderAccount, &receiverAccount);
+    double remittanceFeePercentage = checkRemittanceFee(&senderAccount, &receiverAccount);
     bool confirm = true;
 
     if (remittanceFeePercentage) {
         char temp[8];
-        printf("\n\033[3mTransferring to this account will charge a \033[3;31m%d%% remittance fee.\033[0m", remittanceFeePercentage);
+        printf("\n\033[3mTransferring to this account will charge a \033[3;31m%.0lf%% remittance fee.\033[0m", remittanceFeePercentage);
         printf("\nEnter 'CONFIRM' To Confirm Transfer (Anything Else To Cancel): ");
         scanf("%[^\n]", temp);
         clearInputBuffer();
@@ -196,8 +196,9 @@ void transferToAccount(char *senderNo, char *receiverNo) {
             removeChar(amountToTransfer, ',');
         }
 
-        double remittanceFee = atof(amountToTransfer) * ((double)remittanceFeePercentage / 100);
-        double availableBalance = senderOldBalance - remittanceFee;
+        printf("1:%lf\n", senderOldBalance);
+        double remittanceFee = atof(amountToTransfer) * (remittanceFeePercentage / 100);
+        double availableBalance = senderOldBalance / (1 + remittanceFeePercentage / 100);
 
         while (atof(amountToTransfer) > availableBalance) {
             printf("\033[31m**INVALID AMOUNT: NOT ENOUGH FUNDS**\033[0m\n");
@@ -206,9 +207,10 @@ void transferToAccount(char *senderNo, char *receiverNo) {
             scanf("%[^\n]", amountToTransfer);
             clearInputBuffer();
             removeChar(amountToTransfer, ',');
-            remittanceFee = atof(amountToTransfer) * ((double)remittanceFeePercentage / 100);
-            availableBalance = senderOldBalance - remittanceFee;
+            remittanceFee = atof(amountToTransfer) * (remittanceFeePercentage / 100);
+            availableBalance = senderOldBalance / (1 + remittanceFeePercentage / 100);
         }
+
         senderNewBalance = senderOldBalance - atof(amountToTransfer) - remittanceFee;
         updateAccount(fileDirectorySender, senderNewBalance, &senderAccount);
 
