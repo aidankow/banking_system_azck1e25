@@ -182,6 +182,15 @@ void performDeletion(char *accountNo) {
         scanf("%[^\n]", pin);
         clearInputBuffer();
     }
+    char temp[8];
+    printf("Enter 'CONFIRM' To Confirm Deletion (Anything Else To Cancel): ");
+    scanf("%[^\n]", temp);
+    clearInputBuffer();
 
-    deleteAccount(accountNo, fileDirectory);
+    if (strcasecmp(temp, "CONFIRM") == 0) {
+        deleteAccount(accountNo, fileDirectory);
+        printf("\n\033[1;31mAccount Deleted!\033[0m\n");
+    } else {
+        printf("\n\033[31m**ACTION CANCELLED**\033[0m\n");
+    }
 }
