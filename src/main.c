@@ -99,6 +99,22 @@ void displaySessionInfo() {
     printf("\033[2;3mCount of Loaded Accounts: %d\033[0m\n", loadedAccounts);
 }
 
+int getNoOfAccounts() {
+    char temp[20];
+    int numOfLines = 0;
+
+    FILE *accountPtr;
+    accountPtr = fopen("../database/index.txt", "r");
+    if (accountPtr == NULL) {
+        printf("\033[31mError opening index.txt\033[0m\n");
+    }
+    while (fgets(temp, 20, accountPtr)) {
+        numOfLines++;
+    }
+    return numOfLines;
+    fclose(accountPtr);
+}
+
 void performAction(int action, struct accountDetails *newAccount) {
     if (action == 1) {
         generateDetails(newAccount);
@@ -123,18 +139,13 @@ void performAction(int action, struct accountDetails *newAccount) {
     } else if (action == 2) {
 
         char temp[20];
-        int numOfLines = 0;
+        int numOfLines = getNoOfAccounts();
 
         FILE *accountPtr;
         accountPtr = fopen("../database/index.txt", "r");
         if (accountPtr == NULL) {
             printf("\033[31mError opening index.txt\033[0m\n");
         }
-        while (fgets(temp, 20, accountPtr)) {
-            numOfLines++;
-        }
-
-        rewind(accountPtr);
         char accounts[numOfLines][10];
         int index = 0;
         while (fgets(temp, 20, accountPtr)) {
@@ -172,61 +183,77 @@ void performAction(int action, struct accountDetails *newAccount) {
         }
 
     } else if (action == 3) {
-        char input[10];
-        printf("\nEnter your account number: ");
-        scanf("%[^\n]", input);
-        clearInputBuffer();
-        while (!accountExists(input)) {
-            printf("\033[31m**ACCOUNT NOT FOUND**\033[0m\n");
-            printf("Enter your account number: ");
+        int numberOfAccounts = getNoOfAccounts();
+        if (numberOfAccounts == 0) {
+            printf("\n\033[31m**NO LOADED ACCOUNTS FOUND**\033[0m\n");
+        } else {
+            char input[10];
+            printf("\nEnter your account number: ");
             scanf("%[^\n]", input);
             clearInputBuffer();
+            while (!accountExists(input)) {
+                printf("\033[31m**ACCOUNT NOT FOUND**\033[0m\n");
+                printf("Enter your account number: ");
+                scanf("%[^\n]", input);
+                clearInputBuffer();
+            }
+            depositToAccount(input);
         }
-        depositToAccount(input);
-
     } else if (action == 4) {
-        char input[10];
-        printf("\nEnter your account number: ");
-        scanf("%[^\n]", input);
-        clearInputBuffer();
-        while (!accountExists(input)) {
-            printf("\033[31m**ACCOUNT NOT FOUND**\033[0m\n");
-            printf("Enter your account number: ");
+        int numberOfAccounts = getNoOfAccounts();
+        if (numberOfAccounts == 0) {
+            printf("\n\033[31m**NO LOADED ACCOUNTS FOUND**\033[0m\n");
+        } else {
+            char input[10];
+            printf("\nEnter your account number: ");
             scanf("%[^\n]", input);
             clearInputBuffer();
+            while (!accountExists(input)) {
+                printf("\033[31m**ACCOUNT NOT FOUND**\033[0m\n");
+                printf("Enter your account number: ");
+                scanf("%[^\n]", input);
+                clearInputBuffer();
+            }
+            withdrawFromAccount(input);
         }
-        withdrawFromAccount(input);
 
     } else if (action == 5) {
-        char sender[10];
-        char receiver[10];
-        printf("\nEnter your account number: ");
-        scanf("%[^\n]", sender);
-        clearInputBuffer();
-        while (!accountExists(sender)) {
-            printf("\033[31m**ACCOUNT NOT FOUND**\033[0m\n");
-            printf("Enter your account number: ");
+        int numberOfAccounts = getNoOfAccounts();
+        if (numberOfAccounts == 0) {
+            printf("\n\033[31m**NO LOADED ACCOUNTS FOUND**\033[0m\n");
+        } else if (numberOfAccounts == 1) {
+            printf("\n\033[31m**ONLY ONE LOADED ACCOUNT FOUND**\033[0m\n");
+        } else {
+            char sender[10];
+            char receiver[10];
+            printf("\nEnter your account number: ");
             scanf("%[^\n]", sender);
             clearInputBuffer();
-        }
+            while (!accountExists(sender)) {
+                printf("\033[31m**ACCOUNT NOT FOUND**\033[0m\n");
+                printf("Enter your account number: ");
+                scanf("%[^\n]", sender);
+                clearInputBuffer();
+            }
 
-        printf("Enter the account number you want to transfer to: ");
-        scanf("%[^\n]", receiver);
-        clearInputBuffer();
-        while (strcmp(sender, receiver) == 0) {
-            printf("\033[31m**YOU CANNOT TRANSFER MONEY TO YOURSELF**\033[0m\n");
             printf("Enter the account number you want to transfer to: ");
             scanf("%[^\n]", receiver);
             clearInputBuffer();
-        }
-        while (!accountExists(receiver)) {
-            printf("\033[31m**ACCOUNT NOT FOUND**\033[0m\n");
-            printf("Enter the account number you want to transfer to: ");
-            scanf("%[^\n]", receiver);
-            clearInputBuffer();
-        }
+            while (strcmp(sender, receiver) == 0) {
+                printf("\033[31m**YOU CANNOT TRANSFER MONEY TO YOURSELF**\033[0m\n");
+                printf("Enter the account number you want to transfer to: ");
+                scanf("%[^\n]", receiver);
+                clearInputBuffer();
+            }
+            while (!accountExists(receiver)) {
+                printf("\033[31m**ACCOUNT NOT FOUND**\033[0m\n");
+                printf("Enter the account number you want to transfer to: ");
+                scanf("%[^\n]", receiver);
+                clearInputBuffer();
+            }
 
-        transferToAccount(sender, receiver);
+            transferToAccount(sender, receiver);
+        }
     }
 }
 

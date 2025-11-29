@@ -220,7 +220,7 @@ void transferToAccount(char *senderNo, char *receiverNo) {
 
         printf("\n\033[1;32mRM%.2lf Transferred!\033[0m\n", atof(amountToTransfer));
         if (remittanceFee) {
-            printf("\033[1;31mRemittance Fee of RM%.2lf Was Charged\033[0m\n", remittanceFee);
+            printf("\033[1;31mRemittance Fee of RM%.2lf Was Charged.\033[0m\n", remittanceFee);
         }
     } else {
         printf("\n\033[31m**ACTION CANCELLED**\033[0m\n");
