@@ -196,7 +196,6 @@ void transferToAccount(char *senderNo, char *receiverNo) {
             removeChar(amountToTransfer, ',');
         }
 
-        printf("1:%lf\n", senderOldBalance);
         double remittanceFee = atof(amountToTransfer) * (remittanceFeePercentage / 100);
         double availableBalance = senderOldBalance / (1 + remittanceFeePercentage / 100);
 
