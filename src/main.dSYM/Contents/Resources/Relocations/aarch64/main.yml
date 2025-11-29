@@ -2,28 +2,33 @@
 triple:          'arm64-apple-darwin'
 binary-path:     '/Users/kuanhuakow/Library/CloudStorage/OneDrive-UniversityofSouthampton/banking_system_azck1e25/src/main'
 relocations:
-  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _isNum, symObjAddr: 0x0, symBinAddr: 0x10000132C, symSize: 0xA4 }
-  - { offsetInCU: 0x66, offset: 0x66, size: 0x8, addend: 0x0, symName: _isNum, symObjAddr: 0x0, symBinAddr: 0x10000132C, symSize: 0xA4 }
-  - { offsetInCU: 0xAA, offset: 0xAA, size: 0x8, addend: 0x0, symName: _nameCheck, symObjAddr: 0xA4, symBinAddr: 0x1000013D0, symSize: 0x1AC }
-  - { offsetInCU: 0x118, offset: 0x118, size: 0x8, addend: 0x0, symName: _idCheck, symObjAddr: 0x250, symBinAddr: 0x10000157C, symSize: 0x8C }
-  - { offsetInCU: 0x140, offset: 0x140, size: 0x8, addend: 0x0, symName: _accountTypeCheck, symObjAddr: 0x2DC, symBinAddr: 0x100001608, symSize: 0xAC }
-  - { offsetInCU: 0x168, offset: 0x168, size: 0x8, addend: 0x0, symName: _pinCheck, symObjAddr: 0x388, symBinAddr: 0x1000016B4, symSize: 0x8C }
-  - { offsetInCU: 0x190, offset: 0x190, size: 0x8, addend: 0x0, symName: _clearInputBuffer, symObjAddr: 0x414, symBinAddr: 0x100001740, symSize: 0x2C }
-  - { offsetInCU: 0x1A5, offset: 0x1A5, size: 0x8, addend: 0x0, symName: _generateBankAccountNo, symObjAddr: 0x440, symBinAddr: 0x10000176C, symSize: 0x1E8 }
-  - { offsetInCU: 0x23A, offset: 0x23A, size: 0x8, addend: 0x0, symName: _logBankAccountNo, symObjAddr: 0x628, symBinAddr: 0x100001954, symSize: 0x7C }
-  - { offsetInCU: 0x26C, offset: 0x26C, size: 0x8, addend: 0x0, symName: _logAccountDetails, symObjAddr: 0x6A4, symBinAddr: 0x1000019D0, symSize: 0x164 }
-  - { offsetInCU: 0x2BE, offset: 0x2BE, size: 0x8, addend: 0x0, symName: _inputDetails, symObjAddr: 0x808, symBinAddr: 0x100001B34, symSize: 0x2D8 }
-  - { offsetInCU: 0x2E2, offset: 0x2E2, size: 0x8, addend: 0x0, symName: _generateDetails, symObjAddr: 0xAE0, symBinAddr: 0x100001E0C, symSize: 0x84 }
-  - { offsetInCU: 0x314, offset: 0x314, size: 0x8, addend: 0x0, symName: _checkAccountNo, symObjAddr: 0xB64, symBinAddr: 0x100001E90, symSize: 0x1A4 }
-  - { offsetInCU: 0x390, offset: 0x390, size: 0x8, addend: 0x0, symName: _getAccountNo, symObjAddr: 0xD08, symBinAddr: 0x100002034, symSize: 0x70 }
-  - { offsetInCU: 0x3C6, offset: 0x3C6, size: 0x8, addend: 0x0, symName: _deleteAccount, symObjAddr: 0xD78, symBinAddr: 0x1000020A4, symSize: 0x188 }
-  - { offsetInCU: 0x422, offset: 0x422, size: 0x8, addend: 0x0, symName: _readAccountCSV, symObjAddr: 0xF00, symBinAddr: 0x10000222C, symSize: 0x2AC }
-  - { offsetInCU: 0x48C, offset: 0x48C, size: 0x8, addend: 0x0, symName: _verifyOwner, symObjAddr: 0x11AC, symBinAddr: 0x1000024D8, symSize: 0x374 }
-  - { offsetInCU: 0x554, offset: 0x554, size: 0x8, addend: 0x0, symName: _checkAction, symObjAddr: 0x1520, symBinAddr: 0x10000284C, symSize: 0x1E4 }
-  - { offsetInCU: 0x57C, offset: 0x57C, size: 0x8, addend: 0x0, symName: _logAction, symObjAddr: 0x1704, symBinAddr: 0x100002A30, symSize: 0x7C }
-  - { offsetInCU: 0x5AE, offset: 0x5AE, size: 0x8, addend: 0x0, symName: _getAction, symObjAddr: 0x1780, symBinAddr: 0x100002AAC, symSize: 0x1A4 }
-  - { offsetInCU: 0x5E4, offset: 0x5E4, size: 0x8, addend: 0x0, symName: _getLoadedAccounts, symObjAddr: 0x1924, symBinAddr: 0x100002C50, symSize: 0xE4 }
-  - { offsetInCU: 0x628, offset: 0x628, size: 0x8, addend: 0x0, symName: _displaySessionInfo, symObjAddr: 0x1A08, symBinAddr: 0x100002D34, symSize: 0xC0 }
-  - { offsetInCU: 0x676, offset: 0x676, size: 0x8, addend: 0x0, symName: _performAction, symObjAddr: 0x1AC8, symBinAddr: 0x100002DF4, symSize: 0x458 }
-  - { offsetInCU: 0x75A, offset: 0x75A, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x1F20, symBinAddr: 0x10000324C, symSize: 0x90 }
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _isNum, symObjAddr: 0x0, symBinAddr: 0x100000690, symSize: 0xA4 }
+  - { offsetInCU: 0x66, offset: 0x66, size: 0x8, addend: 0x0, symName: _isNum, symObjAddr: 0x0, symBinAddr: 0x100000690, symSize: 0xA4 }
+  - { offsetInCU: 0xAA, offset: 0xAA, size: 0x8, addend: 0x0, symName: _isDouble, symObjAddr: 0xA4, symBinAddr: 0x100000734, symSize: 0xE8 }
+  - { offsetInCU: 0xED, offset: 0xED, size: 0x8, addend: 0x0, symName: _removeChar, symObjAddr: 0x18C, symBinAddr: 0x10000081C, symSize: 0xAC }
+  - { offsetInCU: 0x13B, offset: 0x13B, size: 0x8, addend: 0x0, symName: _nameCheck, symObjAddr: 0x238, symBinAddr: 0x1000008C8, symSize: 0x128 }
+  - { offsetInCU: 0x18D, offset: 0x18D, size: 0x8, addend: 0x0, symName: _idCheck, symObjAddr: 0x360, symBinAddr: 0x1000009F0, symSize: 0x8C }
+  - { offsetInCU: 0x1B5, offset: 0x1B5, size: 0x8, addend: 0x0, symName: _accountTypeCheck, symObjAddr: 0x3EC, symBinAddr: 0x100000A7C, symSize: 0xAC }
+  - { offsetInCU: 0x1DD, offset: 0x1DD, size: 0x8, addend: 0x0, symName: _pinCheck, symObjAddr: 0x498, symBinAddr: 0x100000B28, symSize: 0x8C }
+  - { offsetInCU: 0x205, offset: 0x205, size: 0x8, addend: 0x0, symName: _clearInputBuffer, symObjAddr: 0x524, symBinAddr: 0x100000BB4, symSize: 0x2C }
+  - { offsetInCU: 0x21A, offset: 0x21A, size: 0x8, addend: 0x0, symName: _generateBankAccountNo, symObjAddr: 0x550, symBinAddr: 0x100000BE0, symSize: 0x1E8 }
+  - { offsetInCU: 0x2AF, offset: 0x2AF, size: 0x8, addend: 0x0, symName: _logBankAccountNo, symObjAddr: 0x738, symBinAddr: 0x100000DC8, symSize: 0x7C }
+  - { offsetInCU: 0x2E1, offset: 0x2E1, size: 0x8, addend: 0x0, symName: _logAccountDetails, symObjAddr: 0x7B4, symBinAddr: 0x100000E44, symSize: 0x164 }
+  - { offsetInCU: 0x333, offset: 0x333, size: 0x8, addend: 0x0, symName: _inputDetails, symObjAddr: 0x918, symBinAddr: 0x100000FA8, symSize: 0x2D8 }
+  - { offsetInCU: 0x357, offset: 0x357, size: 0x8, addend: 0x0, symName: _generateDetails, symObjAddr: 0xBF0, symBinAddr: 0x100001280, symSize: 0x84 }
+  - { offsetInCU: 0x389, offset: 0x389, size: 0x8, addend: 0x0, symName: _checkAccountNo, symObjAddr: 0xC74, symBinAddr: 0x100001304, symSize: 0x1A4 }
+  - { offsetInCU: 0x405, offset: 0x405, size: 0x8, addend: 0x0, symName: _getAccountNo, symObjAddr: 0xE18, symBinAddr: 0x1000014A8, symSize: 0x70 }
+  - { offsetInCU: 0x43B, offset: 0x43B, size: 0x8, addend: 0x0, symName: _deleteAccount, symObjAddr: 0xE88, symBinAddr: 0x100001518, symSize: 0x188 }
+  - { offsetInCU: 0x497, offset: 0x497, size: 0x8, addend: 0x0, symName: _readAccountCSV, symObjAddr: 0x1010, symBinAddr: 0x1000016A0, symSize: 0x2AC }
+  - { offsetInCU: 0x501, offset: 0x501, size: 0x8, addend: 0x0, symName: _performDeletion, symObjAddr: 0x12BC, symBinAddr: 0x10000194C, symSize: 0x374 }
+  - { offsetInCU: 0x5C9, offset: 0x5C9, size: 0x8, addend: 0x0, symName: _accountExists, symObjAddr: 0x1630, symBinAddr: 0x100001CC0, symSize: 0x110 }
+  - { offsetInCU: 0x61D, offset: 0x61D, size: 0x8, addend: 0x0, symName: _updateAccount, symObjAddr: 0x1740, symBinAddr: 0x100001DD0, symSize: 0x148 }
+  - { offsetInCU: 0x67E, offset: 0x67E, size: 0x8, addend: 0x0, symName: _depositToAccount, symObjAddr: 0x1888, symBinAddr: 0x100001F18, symSize: 0x294 }
+  - { offsetInCU: 0x70A, offset: 0x70A, size: 0x8, addend: 0x0, symName: _checkAction, symObjAddr: 0x1B1C, symBinAddr: 0x1000021AC, symSize: 0x1E4 }
+  - { offsetInCU: 0x732, offset: 0x732, size: 0x8, addend: 0x0, symName: _logAction, symObjAddr: 0x1D00, symBinAddr: 0x100002390, symSize: 0x7C }
+  - { offsetInCU: 0x764, offset: 0x764, size: 0x8, addend: 0x0, symName: _getAction, symObjAddr: 0x1D7C, symBinAddr: 0x10000240C, symSize: 0x1A4 }
+  - { offsetInCU: 0x79A, offset: 0x79A, size: 0x8, addend: 0x0, symName: _getLoadedAccounts, symObjAddr: 0x1F20, symBinAddr: 0x1000025B0, symSize: 0xE4 }
+  - { offsetInCU: 0x7DE, offset: 0x7DE, size: 0x8, addend: 0x0, symName: _displaySessionInfo, symObjAddr: 0x2004, symBinAddr: 0x100002694, symSize: 0xC0 }
+  - { offsetInCU: 0x82C, offset: 0x82C, size: 0x8, addend: 0x0, symName: _performAction, symObjAddr: 0x20C4, symBinAddr: 0x100002754, symSize: 0x500 }
+  - { offsetInCU: 0x92D, offset: 0x92D, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x25C4, symBinAddr: 0x100002C54, symSize: 0x90 }
 ...

@@ -12,22 +12,33 @@ bool isNum(char *string) {
     return true;
 }
 
-bool nameCheck(char *name) {
-    // gets rid of whitespaces
-    char temp[101];
-    strcpy(temp, name);
+bool isDouble(char *string) {
+    char temp[strlen(string)+1];
+    strcpy(temp, string);
+    temp[strcspn(temp, ".")] = '0';
+    return isNum(temp);
+}
+
+void removeChar(char *string, char characterToRemove) {
     int currentChar = 0;
     int nextChar = 0;
-    while (temp[currentChar] != '\0') {
-        if (temp[currentChar] != ' ') {
-            temp[nextChar] = temp[currentChar];
+    while (string[currentChar] != '\0') {
+        if (string[currentChar] != characterToRemove) {
+            string[nextChar] = string[currentChar];
             nextChar++;
         }
         currentChar++;
     }
+    string[nextChar] = '\0';
+}
+
+bool nameCheck(char *name) {
+    // gets rid of whitespaces
+    char temp[101];
+    strcpy(temp, name);
+    removeChar(temp, ' ');
 
     // ensure not an empty string
-    temp[nextChar] = '\0';
     if (temp[0] == '\0') {
         return false;
     }

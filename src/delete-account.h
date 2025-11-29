@@ -119,7 +119,7 @@ void readAccountCSV(char *fileDirectory, struct verifyAccount *account) {
     fclose(accountPtr);
 }
 
-void verifyOwner(char *accountNo) {
+void performDeletion(char *accountNo) {
     struct verifyAccount account;
     char fileDirectory[512] = "../database/";
     char fileName[100];

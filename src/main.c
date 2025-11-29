@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include "create-account.h"
 #include "delete-account.h"
-#include "deposit.h"
+#include "deposit-withdraw.h"
 
 // Library/CloudStorage/OneDrive-UniversityofSouthampton/banking_system_azck1e25/src
 
@@ -129,7 +129,7 @@ void performAction(int action, struct accountDetails *newAccount) {
         FILE *accountPtr;
         accountPtr = fopen("../database/index.txt", "r");
         if (accountPtr == NULL) {
-            printf("\033[31m(1)Error opening index.txt\033[0m\n");
+            printf("\033[31mError opening index.txt\033[0m\n");
         }
         while (fgets(temp, 10, accountPtr)) {
             numOfLines++;
@@ -166,9 +166,19 @@ void performAction(int action, struct accountDetails *newAccount) {
 
         char accountNo[10];
         strcpy(accountNo, getAccountNo(input, accounts));
-        verifyOwner(accountNo);
+        performDeletion(accountNo);
     } else if (action == 3) {
-
+        char input[10];
+        printf("\nEnter your account number: ");
+        scanf("%[^\n]", input);
+        clearInputBuffer();
+        while (!accountExists(input)) {
+            printf("\033[31m**ACCOUNT NOT FOUND**\033[0m\n");
+            printf("Enter your account number: ");
+            scanf("%[^\n]", input);
+            clearInputBuffer();
+        }
+        depositToAccount(input);
     }
 }
 
