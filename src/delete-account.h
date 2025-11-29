@@ -4,7 +4,7 @@
 #include <ctype.h>
 #include <string.h>
 
-struct verifyAccount
+struct accountCSV
 {
     char accountNo[10];
     char id[9];
@@ -74,7 +74,7 @@ void deleteAccount(char *accountNo, char *fileDirectory) {
     remove(fileDirectory);
 }
 
-void readAccountCSV(char *fileDirectory, struct verifyAccount *account) {
+void readAccountCSV(char *fileDirectory, struct accountCSV *account) {
     FILE *accountPtr;
     accountPtr = fopen(fileDirectory, "r");
     if (accountPtr == NULL) {
@@ -120,7 +120,7 @@ void readAccountCSV(char *fileDirectory, struct verifyAccount *account) {
 }
 
 void performDeletion(char *accountNo) {
-    struct verifyAccount account;
+    struct accountCSV account;
     char fileDirectory[512] = "../database/";
     char fileName[100];
 

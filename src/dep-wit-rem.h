@@ -20,7 +20,7 @@ bool accountExists(char *input) {
     }
 }
 
-void updateAccount(char *fileDirectory, double newBalance, struct verifyAccount *account) {
+void updateAccount(char *fileDirectory, double newBalance, struct accountCSV *account) {
     char newFileName[100] = "../database/";
     strcat(newFileName, account->accountNo);
     strcat(newFileName, ".txt");
@@ -53,7 +53,7 @@ void verifyPin(char *correctPin) {
 void depositToAccount(char *accountNo) {
     char fileDirectory[512] = "../database/";
     char fileName[100];
-    struct verifyAccount accountToDeposit;
+    struct accountCSV accountToDeposit;
 
     strcpy(fileName, accountNo);
     strcat(fileName, ".txt");
@@ -66,20 +66,20 @@ void depositToAccount(char *accountNo) {
     double oldBalance = atof(accountToDeposit.balance);
     double newBalance;
     char amountToDeposit[100];
-    printf("Enter the amount you wish to deposit: ");
+    printf("Enter the amount you wish to deposit: RM");
     scanf("%[^\n]", amountToDeposit);
     clearInputBuffer();
     removeChar(amountToDeposit, ',');
     while (!isDouble(amountToDeposit)) {
         printf("\033[31m**INVALID AMOUNT**\033[0m\n");
-        printf("Enter the amount you wish to deposit: ");
+        printf("Enter the amount you wish to deposit: RM");
         scanf("%[^\n]", amountToDeposit);
         clearInputBuffer();
         removeChar(amountToDeposit, ',');
     }
     while (atof(amountToDeposit) < 0 || atof(amountToDeposit) > 50000) {
         printf("\033[31m**INVALID AMOUNT: DEPOSITS MUST BE WITHIN 0-50,000**\033[0m\n");
-        printf("Enter the amount you wish to deposit: ");
+        printf("Enter the amount you wish to deposit: RM");
         scanf("%[^\n]", amountToDeposit);
         clearInputBuffer();
         removeChar(amountToDeposit, ',');
@@ -92,7 +92,7 @@ void depositToAccount(char *accountNo) {
 void withdrawFromAccount(char *accountNo) {
     char fileDirectory[512] = "../database/";
     char fileName[100];
-    struct verifyAccount accountToWithdraw;
+    struct accountCSV accountToWithdraw;
 
     strcpy(fileName, accountNo);
     strcat(fileName, ".txt");
@@ -106,22 +106,22 @@ void withdrawFromAccount(char *accountNo) {
     double newBalance;
     char amountToWithdraw[100];
 
-    printf("\n\033[1mAccount Balance: %s\033[0m\n", accountToWithdraw.balance);
+    printf("\n\033[1mAccount Balance: RM%s\033[0m\n", accountToWithdraw.balance);
 
-    printf("\nEnter the amount you wish to withdraw: ");
+    printf("\nEnter the amount you wish to withdraw: RM");
     scanf("%[^\n]", amountToWithdraw);
     clearInputBuffer();
     removeChar(amountToWithdraw, ',');
     while (!isDouble(amountToWithdraw)) {
         printf("\033[31m**INVALID AMOUNT**\033[0m\n");
-        printf("Enter the amount you wish to withdraw: ");
+        printf("Enter the amount you wish to withdraw: RM");
         scanf("%[^\n]", amountToWithdraw);
         clearInputBuffer();
         removeChar(amountToWithdraw, ',');
     }
     while (atof(amountToWithdraw) > oldBalance) {
         printf("\033[31m**INVALID AMOUNT: NOT ENOUGH FUNDS**\033[0m\n");
-        printf("Enter the amount you wish to withdraw: ");
+        printf("Enter the amount you wish to withdraw: RM");
         scanf("%[^\n]", amountToWithdraw);
         clearInputBuffer();
         removeChar(amountToWithdraw, ',');
@@ -129,4 +129,75 @@ void withdrawFromAccount(char *accountNo) {
     newBalance = oldBalance - atof(amountToWithdraw);
     updateAccount(fileDirectory, newBalance, &accountToWithdraw);
     printf("\n\033[1mRM%.2lf Withdrawn!\033[0m\n", atof(amountToWithdraw));
+}
+
+double getRemittanceFee(struct accountCSV *senderAccount, struct accountCSV *receiverAccount, double amountToTransfer) {
+    double remittanceFee = 0;
+    if (strcmp(senderAccount->accountType, "Savings") && strcmp(receiverAccount->accountType, "Current")) {
+        remittanceFee = amountToTransfer * .02;
+    } else if (strcmp(senderAccount->accountType, "Current") && strcmp(receiverAccount->accountType, "Savings")) {
+        remittanceFee = amountToTransfer * .03;
+    }
+    return remittanceFee;
+}
+
+void transferToAccount(char *senderNo, char *receiverNo) {
+    char fileDirectorySender[512] = "../database/";
+    char fileDirectoryReceiver[512] = "../database/";
+    char tempFileName[100];
+    struct accountCSV senderAccount;
+    struct accountCSV receiverAccount;
+
+    strcpy(tempFileName, senderNo);
+    strcat(tempFileName, ".txt");
+    strcat(fileDirectorySender, tempFileName);
+
+    strcpy(tempFileName, receiverNo);
+    strcat(tempFileName, ".txt");
+    strcat(fileDirectoryReceiver, tempFileName);
+
+    readAccountCSV(fileDirectorySender, &senderAccount);
+    readAccountCSV(fileDirectoryReceiver, &receiverAccount);
+
+    verifyPin(senderAccount.pin);
+
+    double senderOldBalance = atof(senderAccount.balance);
+    double senderNewBalance;
+
+    double receiverOldBalance = atof(receiverAccount.balance);
+    double receiverrNewBalance;
+
+    char amountToTransfer[100];
+
+    printf("\n\033[1mAccount Balance: RM%s\033[0m\n", senderAccount.balance);
+
+    printf("\nEnter the amount you wish to transfer: RM");
+    scanf("%[^\n]", amountToTransfer);
+    clearInputBuffer();
+    removeChar(amountToTransfer, ',');
+    while (!isDouble(amountToTransfer)) {
+        printf("\033[31m**INVALID AMOUNT**\033[0m\n");
+        printf("Enter the amount you wish to transfer: RM");
+        scanf("%[^\n]", amountToTransfer);
+        clearInputBuffer();
+        removeChar(amountToTransfer, ',');
+    }
+    while (atof(amountToTransfer) > senderOldBalance) {
+        printf("\033[31m**INVALID AMOUNT: NOT ENOUGH FUNDS**\033[0m\n");
+        printf("Enter the amount you wish to transfer: RM");
+        scanf("%[^\n]", amountToTransfer);
+        clearInputBuffer();
+        removeChar(amountToTransfer, ',');
+    }
+    senderNewBalance = senderOldBalance - atof(amountToTransfer);
+    updateAccount(fileDirectorySender, senderNewBalance, &senderAccount);
+
+    receiverrNewBalance = receiverOldBalance + atof(amountToTransfer);
+    updateAccount(fileDirectoryReceiver, receiverrNewBalance, &receiverAccount);
+
+    double remittanceFee = getRemittanceFee(&senderAccount, &receiverAccount, atof(amountToTransfer));
+    if (remittanceFee) {
+        printf("\033[1;31m**Remittance Fee of %.2lf Was Charged**\033[0m\n", remittanceFee);
+    }
+    printf("\n\033[1mRM%.2lf Transferred!\033[0m\n", atof(amountToTransfer));
 }
