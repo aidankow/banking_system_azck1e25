@@ -66,7 +66,7 @@ int getAction() {
         return 0;
     } else {
         logAction(input);
-        printf("\n*\n*\n*\nPerforming Action: %s\n*\n*\n*\n", input);
+        printf("\n*\n*\n*\n*\n*\n*\n");
         return action;
     }
 }

@@ -87,8 +87,8 @@ void inputDetails(struct accountDetails *newAccount) {
     while (!nameCheck(newAccount->name)) {
         printf("\033[31m**ERROR: INVALID NAME**\033[0m");
         printf("\nPlease Enter Your Full Name: ");
-        fgets(newAccount->name, sizeof(newAccount->name), stdin);
-        newAccount->name[strcspn(newAccount->name, "\n")] = '\0';
+        scanf("%[^\n]", newAccount->name);
+        clearInputBuffer();
     }
 
     printf("Please Enter Your Identification Number (ID): ");
