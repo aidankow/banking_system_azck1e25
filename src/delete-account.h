@@ -78,7 +78,7 @@ void readAccountCSV(char *fileDirectory, struct verifyAccount *account) {
     FILE *accountPtr;
     accountPtr = fopen(fileDirectory, "r");
     if (accountPtr == NULL) {
-        printf("\033[31m(1)Error opening file directory\033[0m\n");
+        printf("\033[31mError opening file directory\033[0m\n");
     }
 
     char line[512];
