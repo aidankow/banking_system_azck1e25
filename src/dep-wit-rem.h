@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 bool accountExists(char *input) {
     char fileDirectory[512] = "../database/";
@@ -197,7 +198,8 @@ void transferToAccount(char *senderNo, char *receiverNo) {
         }
 
         double remittanceFee = atof(amountToTransfer) * (remittanceFeePercentage / 100);
-        double availableBalance = senderOldBalance / (1 + remittanceFeePercentage / 100);
+        double availableBalance = floor(senderOldBalance / (1 + remittanceFeePercentage / 100) * 100.0) / 100.0;
+        // times by 100 to get the 2dp values floored, then divide by 100 to push the decimal point back
 
         while (atof(amountToTransfer) > availableBalance) {
             printf("\033[31m**INVALID AMOUNT: NOT ENOUGH FUNDS**\033[0m\n");
