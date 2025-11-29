@@ -83,14 +83,15 @@ void formatName(char *name) {
         }
     }
 
-    for (int i=0;name[i]!='\0';i++) {
-        if (name[i] == ' ' && name[i-1] == ' ') {
-            for (int j=i;name[j]!='\0';j++)
-                name[j] = name[j + 1];
-            i--; //only move forward once the current character is not a space
+    for (int currentIndex=0;name[currentIndex]!='\0';currentIndex++) {
+        if (name[currentIndex] == ' ' && name[currentIndex-1] == ' ') {
+            for (int i=currentIndex;name[i]!='\0';i++)
+                name[i] = name[i + 1];
+            currentIndex--; //prevent incrementation until there are no more repeated spaces
         }
     }
 
+    //make the first letter of each word capital (.title())
     int wordPos = 0;
     for (int i=0;name[i]!='\0';i++) {
         if (i == wordPos) {
