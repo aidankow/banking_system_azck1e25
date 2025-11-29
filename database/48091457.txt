@@ -1,1 +1,1 @@
-48091457,12345678,Aidan Kow Zen Chi,1234,Savings,100.00
+48091457,12345678,Aidan Kow Zen Chi,1234,Savings,0.00

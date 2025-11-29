@@ -38,7 +38,7 @@ void updateAccount(char *fileDirectory, double newBalance, struct accountCSV *ac
 }
 
 void verifyPin(char *correctPin) {
-    char pin[5];
+    char pin[5] = "";
     printf("Enter your 4-Digit Pin: ");
     scanf("%[^\n]", pin);
     clearInputBuffer();
@@ -206,7 +206,7 @@ void transferToAccount(char *senderNo, char *receiverNo) {
             scanf("%[^\n]", amountToTransfer);
             clearInputBuffer();
             removeChar(amountToTransfer, ',');
-            remittanceFee = atof(amountToTransfer) * (remittanceFeePercentage/100);
+            remittanceFee = atof(amountToTransfer) * ((double)remittanceFeePercentage / 100);
             availableBalance = senderOldBalance - remittanceFee;
         }
         senderNewBalance = senderOldBalance - atof(amountToTransfer) - remittanceFee;
