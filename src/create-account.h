@@ -53,7 +53,7 @@ void logBankAccountNo(char *accountNo) {
     FILE *accountPtr;
     accountPtr = fopen("../database/index.txt", "a");
     if (accountPtr == NULL) {
-        printf("\033[31m(2)Error opening index.txt\033[0m\n");
+        printf("\033[31mError opening index.txt\033[0m\n");
     }
     fprintf(accountPtr, "%s\n", accountNo);
     fclose(accountPtr);
@@ -76,16 +76,42 @@ void logAccountDetails(struct accountDetails *newAccount) {
     fclose(accountPtr);
 }
 
+void formatName(char *name) {
+    while (!isalpha(name[0])) {
+        for (int i = 0;name[i]!='\0';i++) {
+            name[i] = name[i + 1];
+        }
+    }
+
+    for (int i=0;name[i]!='\0';i++) {
+        if (name[i] == ' ' && name[i-1] == ' ') {
+            for (int j=i;name[j]!='\0';j++)
+                name[j] = name[j + 1];
+            i--; //only move forward once the current character is not a space
+        }
+    }
+
+    int wordPos = 0;
+    for (int i=0;name[i]!='\0';i++) {
+        if (i == wordPos) {
+            name[i] = toupper(name[i]);
+        } else if (name[i] == ' ') {
+            wordPos = i+1;
+        }
+    }
+}
+
 void inputDetails(struct accountDetails *newAccount) {
     printf("\nPlease Enter Your Full Name: ");
-    fgets(newAccount->name, sizeof(newAccount->name), stdin);
-    newAccount->name[strcspn(newAccount->name, "\n")] = '\0';
+    scanf("%[^\n]", newAccount->name);
+    clearInputBuffer();
     while (!nameCheck(newAccount->name)) {
         printf("\033[31m**ERROR: INVALID NAME**\033[0m");
         printf("\nPlease Enter Your Full Name: ");
         scanf("%[^\n]", newAccount->name);
         clearInputBuffer();
     }
+    formatName(newAccount->name);
 
     printf("Please Enter Your Identification Number (ID): ");
     scanf("%[^\n]", newAccount->id);
