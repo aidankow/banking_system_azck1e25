@@ -28,7 +28,6 @@ void generateBankAccountNo(char *accountNo) {
         printf("\033[31m(1)Error opening index.txt\033[0m\n");
     }
 
-    //check if account number exists in index.txt
     while (!valid) {
         for(int i=0;i<range;i++) {
             char temp = (rand() % (9-0+1)) + '0';
@@ -38,10 +37,9 @@ void generateBankAccountNo(char *accountNo) {
         valid = true;
         rewind(accountPtr);
         while (fgets(temp, 100, accountPtr)) {
-            temp[strcspn(temp, "\n")] = 0; //get rid of \n from line read from file
-            if (strcmp(temp, accountNo) == 0) {
+            temp[strcspn(temp, "\n")] = 0;
+            if (strcmp(temp, accountNo) == 0) { //check if account number exists in index.txt
                 valid = false;
-                printf("ERROR: %s | %s\n", temp, accountNo);
                 break;
             }
         }
@@ -77,6 +75,7 @@ void logAccountDetails(struct accountDetails *newAccount) {
 }
 
 void formatName(char *name) {
+    //makes sure the first caracter is an alphabet
     while (!isalpha(name[0])) {
         for (int i = 0;name[i]!='\0';i++) {
             name[i] = name[i + 1];
