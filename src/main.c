@@ -124,7 +124,7 @@ void performAction(int action, struct accountDetails *newAccount) {
 
     } else if (action == 2) {
 
-        char temp[10];
+        char temp[20];
         int numOfLines = 0;
 
         FILE *accountPtr;
@@ -132,14 +132,18 @@ void performAction(int action, struct accountDetails *newAccount) {
         if (accountPtr == NULL) {
             printf("\033[31mError opening index.txt\033[0m\n");
         }
-        while (fgets(temp, 10, accountPtr)) {
+        while (fgets(temp, 20, accountPtr)) {
             numOfLines++;
         }
+        
         rewind(accountPtr);
         char accounts[numOfLines][10];
         int index = 0;
-        while (fgets(temp, 10, accountPtr)) {
+        while (fgets(temp, 20, accountPtr)) {
             temp[strcspn(temp, "\n")] = '\0';
+            if (temp[0] == '\0') {
+                continue;
+            }
             strcpy(accounts[index], temp);
             index++;
         }
@@ -147,11 +151,11 @@ void performAction(int action, struct accountDetails *newAccount) {
 
         printf("\n\033[1mLIST OF EXISTING BANK ACCOUNTS:\033[0m\n");
         if (numOfLines == 1) { //there will always be an empty newline in index.txt
+            printf("\n---No Accounts Found---\n\n");
+        } else {
             for (int i=0;i<numOfLines;i++) {
                 printf("%d. %s\n", i+1, accounts[i]);
             }
-        } else {
-            printf("\n---No Accounts Found---\n\n");
         }
 
         printf("Which account do you wish to delete?: ");

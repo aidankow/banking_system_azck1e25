@@ -3,6 +3,10 @@
 #include <ctype.h>
 #include <string.h>
 
+void clearInputBuffer() {
+    while ((getchar()) != '\n');
+}
+
 bool isNum(char *string) {
     for (int i=0;string[i]!='\0';i++) {
         if (!isdigit(string[i])) {

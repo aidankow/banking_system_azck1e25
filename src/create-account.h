@@ -16,10 +16,6 @@ struct accountDetails
     double balance;
 };
 
-void clearInputBuffer() {
-    while ((getchar()) != '\n');
-}
-
 void generateBankAccountNo(char *accountNo) {
     char temp[100];
     bool valid = false;

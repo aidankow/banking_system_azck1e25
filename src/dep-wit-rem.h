@@ -196,8 +196,8 @@ void transferToAccount(char *senderNo, char *receiverNo) {
     double remittanceFee = getRemittanceFee(&senderAccount, &receiverAccount, atof(amountToTransfer), &percentage);
     if (remittanceFee) {
         char temp[8];
-        printf("\n\033[3mTransferring to this account will charge a \033[1;3m%d%% remittance fee.\033[0m", percentage);
-        printf("Enter 'CONFIRM' To Confirm Transfer (Anything Else To Cancel): ");
+        printf("\n\033[3mTransferring to this account will charge a \033[3;31m%d%% remittance fee.\033[0m", percentage);
+        printf("\nEnter 'CONFIRM' To Confirm Transfer (Anything Else To Cancel): ");
         scanf("%[^\n]", temp);
         clearInputBuffer();
 
