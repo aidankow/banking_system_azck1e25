@@ -7,8 +7,6 @@
 #include "delete-account.h"
 #include "dep-wit-rem.h"
 
-// Library/CloudStorage/OneDrive-UniversityofSouthampton/banking_system_azck1e25/src
-
 int checkAction(char *action) {
     if (strcmp(action, "1") == 0 || strcasecmp(action, "create") == 0) {
         return 1;
@@ -135,7 +133,7 @@ void performAction(int action, struct accountDetails *newAccount) {
         while (fgets(temp, 20, accountPtr)) {
             numOfLines++;
         }
-        
+
         rewind(accountPtr);
         char accounts[numOfLines][10];
         int index = 0;
