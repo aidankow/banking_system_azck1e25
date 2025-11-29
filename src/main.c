@@ -35,8 +35,8 @@ void logAction(char *action) {
 }
 
 int getAction() {
-    char input[11];
-    int action;
+    char input[11] = "";
+    int action = -1;
 
     printf("\n------------------------------------\n");
     printf("\033[1mChoose an Action by Entering a Number: \033[0m\n");
@@ -148,28 +148,28 @@ void performAction(int action, struct accountDetails *newAccount) {
         fclose(accountPtr);
 
         printf("\n\033[1mLIST OF EXISTING BANK ACCOUNTS:\033[0m\n");
-        if (numOfLines == 1) { //there will always be an empty newline in index.txt
+        if (numOfLines == 0) {
             printf("\n---No Accounts Found---\n\n");
+            printf("\033[31m**CANCELLING ACTION: NO ACCOUNTS FOUND**\033[0m\n");
         } else {
             for (int i=0;i<numOfLines;i++) {
                 printf("%d. %s\n", i+1, accounts[i]);
             }
-        }
-
-        printf("Which account do you wish to delete?: ");
-        char input[10];
-        scanf("%[^\n]", input);
-        clearInputBuffer();
-        while (!checkAccountNo(input, numOfLines, accounts)) {
-            printf("\033[31m**ACCOUNT NOT FOUND**\033[0m\n");
             printf("Which account do you wish to delete?: ");
+            char input[10];
             scanf("%[^\n]", input);
             clearInputBuffer();
-        }
+            while (!checkAccountNo(input, numOfLines, accounts)) {
+                printf("\033[31m**ACCOUNT NOT FOUND**\033[0m\n");
+                printf("Which account do you wish to delete?: ");
+                scanf("%[^\n]", input);
+                clearInputBuffer();
+            }
 
-        char accountNo[10];
-        strcpy(accountNo, getAccountNo(input, accounts));
-        performDeletion(accountNo);
+            char accountNo[10];
+            strcpy(accountNo, getAccountNo(input, accounts));
+            performDeletion(accountNo);
+        }
 
     } else if (action == 3) {
         char input[10];
@@ -233,11 +233,11 @@ void performAction(int action, struct accountDetails *newAccount) {
 int main() {
     char formattedTime[64];
     int action = -1;
-    struct accountDetails newAccount;
 
     displaySessionInfo();
 
     while (action != 0) {
+        struct accountDetails newAccount;
         action = getAction();
         performAction(action, &newAccount);
     }
