@@ -74,15 +74,7 @@ void deleteAccount(char *accountNo, char *fileDirectory) {
     remove(fileDirectory);
 }
 
-void verifyOwner(char *accountNo) {
-    struct verifyAccount account;
-    char fileDirectory[512] = "../database/";
-    char fileName[100];
-
-    strcpy(fileName, accountNo);
-    strcat(fileName, ".txt");
-    strcat(fileDirectory, fileName);
-
+void readAccountCSV(char *fileDirectory, struct verifyAccount *account) {
     FILE *accountPtr;
     accountPtr = fopen(fileDirectory, "r");
     if (accountPtr == NULL) {
@@ -95,36 +87,48 @@ void verifyOwner(char *accountNo) {
 
         char *token = strtok(line, ",");
         if (token) {
-            strncpy(account.accountNo, token, sizeof(account.accountNo) - 1);
-            account.accountNo[sizeof(account.accountNo) - 1] = '\0';
+            strncpy(account->accountNo, token, sizeof(account->accountNo) - 1);
+            account->accountNo[sizeof(account->accountNo) - 1] = '\0';
         }
         token = strtok(NULL, ",");
         if (token) {
-            strncpy(account.id, token, sizeof(account.id) - 1);
-            account.id[sizeof(account.id) - 1] = '\0';
+            strncpy(account->id, token, sizeof(account->id) - 1);
+            account->id[sizeof(account->id) - 1] = '\0';
         }
         token = strtok(NULL, ",");
         if (token) {
-            strncpy(account.name, token, sizeof(account.name) - 1);
-            account.name[sizeof(account.name) - 1] = '\0';
+            strncpy(account->name, token, sizeof(account->name) - 1);
+            account->name[sizeof(account->name) - 1] = '\0';
         }
         token = strtok(NULL, ",");
         if (token) {
-            strncpy(account.pin, token, sizeof(account.pin) - 1);
-            account.pin[sizeof(account.pin) - 1] = '\0';
+            strncpy(account->pin, token, sizeof(account->pin) - 1);
+            account->pin[sizeof(account->pin) - 1] = '\0';
         }
         token = strtok(NULL, ",");
         if (token) {
-            strncpy(account.accountType, token, sizeof(account.accountType) - 1);
-            account.accountType[sizeof(account.accountType) - 1] = '\0';
+            strncpy(account->accountType, token, sizeof(account->accountType) - 1);
+            account->accountType[sizeof(account->accountType) - 1] = '\0';
         }
         token = strtok(NULL, ",");
         if (token) {
-            strncpy(account.balance, token, sizeof(account.balance) - 1);
-            account.balance[sizeof(account.balance) - 1] = '\0';
+            strncpy(account->balance, token, sizeof(account->balance) - 1);
+            account->balance[sizeof(account->balance) - 1] = '\0';
         }
     }
     fclose(accountPtr);
+}
+
+void verifyOwner(char *accountNo) {
+    struct verifyAccount account;
+    char fileDirectory[512] = "../database/";
+    char fileName[100];
+
+    strcpy(fileName, accountNo);
+    strcat(fileName, ".txt");
+    strcat(fileDirectory, fileName);
+
+    readAccountCSV(fileDirectory, &account);
 
     char accountNum[10];
     char idDigits[5];

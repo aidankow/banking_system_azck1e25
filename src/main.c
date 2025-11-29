@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include "create-account.h"
 #include "delete-account.h"
+#include "deposit.h"
 
 // Library/CloudStorage/OneDrive-UniversityofSouthampton/banking_system_azck1e25/src
 
@@ -123,7 +124,7 @@ void performAction(int action, struct accountDetails *newAccount) {
     } else if (action == 2) {
 
         char temp[10];
-        int counter = 0;
+        int numOfLines = 0;
 
         FILE *accountPtr;
         accountPtr = fopen("../database/index.txt", "r");
@@ -131,10 +132,10 @@ void performAction(int action, struct accountDetails *newAccount) {
             printf("\033[31m(1)Error opening index.txt\033[0m\n");
         }
         while (fgets(temp, 10, accountPtr)) {
-            counter++;
+            numOfLines++;
         }
         rewind(accountPtr);
-        char accounts[counter][10];
+        char accounts[numOfLines][10];
         int index = 0;
         while (fgets(temp, 10, accountPtr)) {
             temp[strcspn(temp, "\n")] = '\0';
@@ -144,15 +145,19 @@ void performAction(int action, struct accountDetails *newAccount) {
         fclose(accountPtr);
 
         printf("\n\033[1mLIST OF EXISTING BANK ACCOUNTS:\033[0m\n");
-        for (int i=0;i<counter;i++) {
-            printf("%d. %s\n", i+1, accounts[i]);
+        if (numOfLines == 1) { //there will always be an empty newline in index.txt
+            for (int i=0;i<numOfLines;i++) {
+                printf("%d. %s\n", i+1, accounts[i]);
+            }
+        } else {
+            printf("\n---No Accounts Found---\n\n");
         }
 
         printf("Which account do you wish to delete?: ");
         char input[10];
         scanf("%[^\n]", input);
         clearInputBuffer();
-        while (!checkAccountNo(input, counter, accounts)) {
+        while (!checkAccountNo(input, numOfLines, accounts)) {
             printf("\033[31m**ACCOUNT NOT FOUND**\033[0m\n");
             printf("Which account do you wish to delete?: ");
             scanf("%[^\n]", input);
@@ -162,6 +167,8 @@ void performAction(int action, struct accountDetails *newAccount) {
         char accountNo[10];
         strcpy(accountNo, getAccountNo(input, accounts));
         verifyOwner(accountNo);
+    } else if (action == 3) {
+
     }
 }
 
