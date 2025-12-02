@@ -6,6 +6,9 @@
 #include <string.h>
 #include "input-handling.h"
 
+char TRANSACTION_LOG[]="../database/transaction.log";
+char INDEX_FILE[]="../database/index.txt";
+
 struct accountDetails
 {
     char name[101];
@@ -23,7 +26,7 @@ void generateBankAccountNo(char *accountNo) {
     srand(time(NULL));
 
     FILE *accountPtr;
-    accountPtr = fopen("../database/index.txt", "r");
+    accountPtr = fopen(INDEX_FILE, "r");
     if (accountPtr == NULL) {
         printf("\033[31m(1)Error opening index.txt\033[0m\n");
     }
@@ -49,7 +52,7 @@ void generateBankAccountNo(char *accountNo) {
 
 void logBankAccountNo(char *accountNo) {
     FILE *accountPtr;
-    accountPtr = fopen("../database/index.txt", "a");
+    accountPtr = fopen(INDEX_FILE, "a");
     if (accountPtr == NULL) {
         printf("\033[31mError opening index.txt\033[0m\n");
     }

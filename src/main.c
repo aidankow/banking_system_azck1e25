@@ -26,7 +26,7 @@ int checkAction(char *action) {
 
 void logAction(char *action) {
     FILE *transactionPtr;
-    transactionPtr = fopen("../database/transaction.log", "a");
+    transactionPtr = fopen(TRANSACTION_LOG, "a");
     if (transactionPtr == NULL) {
         printf("\033[31mError opening transaction.log\033[0m\n");
     }
@@ -75,7 +75,7 @@ int getLoadedAccounts() {
     int counter = 0;
 
     FILE *accountPtr;
-    accountPtr = fopen("../database/index.txt", "r");
+    accountPtr = fopen(INDEX_FILE, "r");
     if (accountPtr == NULL) {
         printf("\033[31m(1)Error opening index.txt\033[0m\n");
         return 0;
@@ -104,7 +104,7 @@ int getNoOfAccounts() {
     int numOfLines = 0;
 
     FILE *accountPtr;
-    accountPtr = fopen("../database/index.txt", "r");
+    accountPtr = fopen(INDEX_FILE, "r");
     if (accountPtr == NULL) {
         printf("\033[31mError opening index.txt\033[0m\n");
     }
@@ -142,7 +142,7 @@ void performAction(int action, struct accountDetails *newAccount) {
         int numOfLines = getNoOfAccounts();
 
         FILE *accountPtr;
-        accountPtr = fopen("../database/index.txt", "r");
+        accountPtr = fopen(INDEX_FILE, "r");
         if (accountPtr == NULL) {
             printf("\033[31mError opening index.txt\033[0m\n");
         }

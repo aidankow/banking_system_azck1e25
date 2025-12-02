@@ -49,7 +49,7 @@ void deleteAccount(char *accountNo, char *fileDirectory) {
     char temp[100];
 
     FILE *accountPtr;
-    accountPtr = fopen("../database/index.txt", "r");
+    accountPtr = fopen(INDEX_FILE, "r");
     if (accountPtr == NULL) {
         printf("\033[31m(1)Error opening index.txt\033[0m\n");
     }
@@ -69,8 +69,8 @@ void deleteAccount(char *accountNo, char *fileDirectory) {
     fclose(accountPtr);
     fclose(tempPtr);
 
-    remove("../database/index.txt");
-    rename("../database/temp.txt", "../database/index.txt");
+    remove(INDEX_FILE);
+    rename("../database/temp.txt", INDEX_FILE);
     remove(fileDirectory);
 }
 
