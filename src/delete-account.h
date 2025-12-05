@@ -143,6 +143,8 @@ void performDeletion(char *accountNo) {
         clearInputBuffer();
     }
 
+    int attempts = 0;
+    bool verified = true;
     printf("Re-Confirm the Last 4-Digits of the ID: ");
     scanf("%[^\n]", idDigits);
     clearInputBuffer();
@@ -157,7 +159,13 @@ void performDeletion(char *accountNo) {
         }
     }
     while (!equal) {
+        attempts+=1;
+        if (!(attempts < 3)) {
+            break;
+        }
         printf("\033[31m**ID NUMBERS DO NOT MATCH**\033[0m\n");
+        printf("\033[31mFailed attempts: %d (%d attempts left).\033[0m\n", attempts, (3-attempts));
+
         printf("Re-Confirm the Last 4-Digits of the ID: ");
         scanf("%[^\n]", idDigits);
         clearInputBuffer();
@@ -172,25 +180,47 @@ void performDeletion(char *accountNo) {
             }
         }
     }
+    if (attempts >= 3) {
+        printf("\n\033[31mFailed to verify account.\033[0m");
+        printf("\n\033[31m**ACTION CANCELLED**\033[0m\n");
+        verified = false;
+    }
 
-    printf("Re-Confirm the 4-Digit Pin: ");
-    scanf("%[^\n]", pin);
-    clearInputBuffer();
-    while (strcmp(pin, account.pin) != 0) {
-        printf("\033[31m**PINS DO NOT MATCH**\033[0m\n");
+    if (verified) {
+        attempts = 0;
         printf("Re-Confirm the 4-Digit Pin: ");
         scanf("%[^\n]", pin);
         clearInputBuffer();
-    }
-    char temp[8];
-    printf("Enter 'CONFIRM' To Confirm Deletion (Anything Else To Cancel): ");
-    scanf("%[^\n]", temp);
-    clearInputBuffer();
+        while (strcmp(pin, account.pin) != 0) {
+            attempts+=1;
+            if (!(attempts < 3)) {
+                break;
+            }
+            printf("\033[31m**PINS DO NOT MATCH**\033[0m\n");
+            printf("\033[31mFailed attempts: %d (%d attempts left).\033[0m\n", attempts, (3-attempts));
 
-    if (strcasecmp(temp, "CONFIRM") == 0) {
-        deleteAccount(accountNo, fileDirectory);
-        printf("\n\033[1;31mAccount Deleted!\033[0m\n");
-    } else {
-        printf("\n\033[31m**ACTION CANCELLED**\033[0m\n");
+            printf("Re-Confirm the 4-Digit Pin: ");
+            scanf("%[^\n]", pin);
+            clearInputBuffer();
+        }
+        if (attempts >= 3) {
+            printf("\n\033[31mFailed to verify account.\033[0m");
+            printf("\n\033[31m**ACTION CANCELLED**\033[0m\n");
+            verified = false;
+        }
+    }
+
+    if (verified) {
+        char temp[8];
+        printf("Enter 'CONFIRM' To Confirm Deletion (Anything Else To Cancel): ");
+        scanf("%[^\n]", temp);
+        clearInputBuffer();
+
+        if (strcasecmp(temp, "CONFIRM") == 0) {
+            deleteAccount(accountNo, fileDirectory);
+            printf("\n\033[1;31mAccount Deleted!\033[0m\n");
+        } else {
+            printf("\n\033[31m**ACTION CANCELLED**\033[0m\n");
+        }
     }
 }

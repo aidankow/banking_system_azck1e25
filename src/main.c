@@ -6,6 +6,7 @@
 #include "create-account.h"
 #include "delete-account.h"
 #include "dep-wit-rem.h"
+// TRANSACTION_LOG and INDEX_FILE declared in create-account.h
 
 int checkAction(char *action) {
     if (strcmp(action, "1") == 0 || strcasecmp(action, "create") == 0) {
@@ -121,10 +122,10 @@ void performAction(int action, struct accountDetails *newAccount) {
         char temp[8];
 
         printf("\n\nDETAILS ENTERED:\n");
-        printf("%s\n", newAccount->name);
-        printf("%s\n", newAccount->id);
-        printf("%s\n", newAccount->accountType);
-        printf("%s\n", newAccount->pin);
+        printf("\033[1mName         : \033[0m%s\n", newAccount->name);
+        printf("\033[1mID           : \033[0m%s\n", newAccount->id);
+        printf("\033[1mAccount Type : \033[0m%s\n", newAccount->accountType);
+        printf("\033[1mPIN          : \033[0m%s\n", newAccount->pin);
         printf("Enter 'CONFIRM' To Confirm Details (Anything Else To Cancel): ");
         scanf("%[^\n]", temp);
         clearInputBuffer();
